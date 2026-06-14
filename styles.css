@@ -1269,6 +1269,11 @@ h1 {
     display: none;
   }
 
+  .personal-mark,
+  .contact-brand {
+    display: none;
+  }
+
   .nav {
     right: 12px;
     left: 12px;
@@ -1396,13 +1401,6 @@ h1 {
 
   .contact-section {
     padding: 32px 22px;
-  }
-
-  .contact-brand {
-    position: static;
-    width: 46px;
-    height: 46px;
-    margin-bottom: 18px;
   }
 
   .site-footer {
