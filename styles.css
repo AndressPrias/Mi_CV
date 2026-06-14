@@ -101,6 +101,59 @@ a {
   border-radius: 999px;
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(6, 7, 10, 0.76);
+  color: var(--text);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.menu-icon {
+  position: relative;
+  width: 18px;
+  height: 12px;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 180ms ease, top 180ms ease;
+}
+
+.menu-icon::before {
+  top: 1px;
+}
+
+.menu-icon::after {
+  top: 9px;
+}
+
+.site-header.is-open .menu-icon::before {
+  top: 5px;
+  transform: rotate(45deg);
+}
+
+.site-header.is-open .menu-icon::after {
+  top: 5px;
+  transform: rotate(-45deg);
+}
+
 .nav a,
 .header-action {
   min-height: 38px;
@@ -847,11 +900,45 @@ h1 {
     gap: 10px;
   }
 
+  .menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
   .nav {
     order: 3;
     width: 100%;
-    overflow-x: auto;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    border-color: transparent;
+    background: rgba(6, 7, 10, 0);
+    box-shadow: none;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 220ms ease, opacity 180ms ease, transform 180ms ease, padding 180ms ease, border-color 180ms ease, background 180ms ease;
+  }
+
+  .site-header.is-open .nav {
+    max-height: 230px;
+    padding: 8px;
+    border-color: var(--line);
+    background: rgba(6, 7, 10, 0.88);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 10px;
+    background: rgba(255, 255, 255, 0.055);
+    text-align: center;
   }
 
   .hero,
@@ -930,7 +1017,7 @@ h1 {
 
 @media (max-width: 620px) {
   .brand {
-    max-width: calc(100% - 124px);
+    max-width: calc(100% - 104px);
   }
 
   .brand span:last-child {
@@ -940,13 +1027,25 @@ h1 {
   }
 
   .header-action {
+    display: none;
+  }
+
+  .menu-toggle {
     padding-inline: 12px;
   }
 
+  .menu-toggle span:first-child {
+    display: none;
+  }
+
+  .nav {
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+  }
+
   .nav a {
-    flex: 1;
-    min-width: max-content;
-    text-align: center;
+    justify-content: flex-start;
+    padding-inline: 14px;
   }
 
   h1 {

@@ -79,7 +79,28 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
   revealObserver.observe(element);
 });
 
+const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.querySelector(".menu-toggle");
+const mainNav = document.querySelector("#mainNav");
+
+function setMenuOpen(isOpen) {
+  siteHeader.classList.toggle("is-open", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
+}
+
+menuToggle.addEventListener("click", () => {
+  setMenuOpen(!siteHeader.classList.contains("is-open"));
+});
+
+mainNav.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+
 window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 900) setMenuOpen(false);
+});
 window.addEventListener("pointermove", (event) => {
   pointer.x = event.clientX / Math.max(window.innerWidth, 1);
   pointer.y = event.clientY / Math.max(window.innerHeight, 1);
