@@ -307,7 +307,7 @@ function runGame() {
   gameTimer.textContent = timeLeft;
   startGame.textContent = "Reiniciar";
   clearBugs();
-  setMessage("Bug Hunter", "Caza todos los bugs posibles.", false);
+  setMessage("Mini Juego", "Caza todos los bugs posibles.", false);
 
   window.clearInterval(timerId);
   window.clearInterval(spawnId);

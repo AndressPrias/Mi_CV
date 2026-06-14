@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio premium de Andres Prias, desarrollador de software y web enfocado en proyectos reales, trazabilidad, ecommerce y marca personal.">
   <title>Andres Prias | Desarrollo de Software y Web</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/Fav_icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +16,9 @@
 
   <header class="site-header">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
-      <span class="brand-mark">AP</span>
+      <span class="brand-mark">
+        <img src="assets/brand-logo.png" alt="" aria-hidden="true">
+      </span>
       <span>Andres Prias</span>
     </a>
 
@@ -41,6 +47,10 @@
         <p class="hero-lead">
           Desarrollador de software enfocado en construir experiencias digitales modernas, soluciones practicas y productos orientados a resolver problemas reales.
         </p>
+        <div class="personal-mark" aria-label="Marca personal de desarrollo">
+          <img src="assets/brand-logo.png" alt="" aria-hidden="true">
+          <span>Software, web y producto digital</span>
+        </div>
         <div class="hero-actions">
           <a class="btn primary" href="#proyectos">
             <span>Ver proyectos</span>
@@ -222,7 +232,7 @@
     <section class="game-section" id="bug-hunter">
       <div class="section-heading" data-reveal>
         <p class="eyebrow">Mini juego profesional</p>
-        <h2>Bug Hunter</h2>
+        <h2 class="game-title"><span class="scope-icon" aria-hidden="true"></span>Mini Juego</h2>
         <p>Encuentra y elimina tantos bugs como puedas en 30 segundos. Tu mejor puntuacion queda guardada localmente en este navegador.</p>
       </div>
 
@@ -245,7 +255,7 @@
 
           <div class="game-arena" id="gameArena" aria-live="polite">
             <div class="arena-message" id="arenaMessage">
-              <span>Bug Hunter</span>
+              <span>Mini Juego</span>
               <strong>Presiona iniciar y caza los bugs que aparezcan.</strong>
             </div>
           </div>
@@ -327,6 +337,9 @@
     </section>
 
     <section class="contact-section" id="contacto" data-reveal>
+      <div class="contact-brand" aria-hidden="true">
+        <img src="assets/brand-logo.png" alt="">
+      </div>
       <p class="eyebrow">Contacto</p>
       <h2>Construyamos una presencia digital que se sienta premium y trabaje en serio.</h2>
       <div class="contact-actions">
