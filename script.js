@@ -79,9 +79,31 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
   revealObserver.observe(element);
 });
 
+const aboutTabs = document.querySelectorAll("[data-about-tab]");
+const aboutPanels = document.querySelectorAll("[data-about-panel]");
+
+aboutTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const selectedPanel = tab.dataset.aboutTab;
+
+    aboutTabs.forEach((item) => {
+      const isActive = item === tab;
+      item.classList.toggle("is-active", isActive);
+      item.setAttribute("aria-selected", String(isActive));
+    });
+
+    aboutPanels.forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.aboutPanel === selectedPanel);
+    });
+  });
+});
+
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector("#mainNav");
+let lastScrollY = window.scrollY;
+let scrollTicking = false;
+let lastTouchY = 0;
 
 function setMenuOpen(isOpen) {
   siteHeader.classList.toggle("is-open", isOpen);
@@ -89,24 +111,89 @@ function setMenuOpen(isOpen) {
   menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
 }
 
+function setMobileNavVisible(isVisible) {
+  document.body.classList.toggle("is-mobile-nav-visible", isVisible);
+  mainNav.classList.toggle("is-mobile-visible", isVisible);
+}
+
+function updateMobileNavByScroll() {
+  if (window.innerWidth > 900) {
+    setMobileNavVisible(false);
+    lastScrollY = window.scrollY;
+    return;
+  }
+
+  const currentScrollY = window.scrollY;
+  const delta = currentScrollY - lastScrollY;
+
+  if (currentScrollY < 40) {
+    setMobileNavVisible(true);
+  } else if (delta > 8) {
+    setMobileNavVisible(false);
+  } else if (delta < -8) {
+    setMobileNavVisible(true);
+  }
+
+  lastScrollY = Math.max(currentScrollY, 0);
+}
+
+function handleScrollIntent(deltaY) {
+  if (window.innerWidth > 900) return;
+  if (window.scrollY < 40) {
+    setMobileNavVisible(true);
+  } else if (deltaY > 4) {
+    setMobileNavVisible(false);
+  } else if (deltaY < -4) {
+    setMobileNavVisible(true);
+  }
+}
+
 menuToggle.addEventListener("click", () => {
   setMenuOpen(!siteHeader.classList.contains("is-open"));
 });
 
 mainNav.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => setMenuOpen(false));
+  link.addEventListener("click", () => {
+    setMenuOpen(false);
+    setMobileNavVisible(false);
+  });
 });
 
 window.addEventListener("resize", resizeCanvas);
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 900) setMenuOpen(false);
+  if (window.innerWidth > 900) {
+    setMenuOpen(false);
+    setMobileNavVisible(false);
+  } else {
+    setMobileNavVisible(true);
+  }
 });
+window.addEventListener("scroll", () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  window.requestAnimationFrame(() => {
+    updateMobileNavByScroll();
+    scrollTicking = false;
+  });
+}, { passive: true });
+window.addEventListener("wheel", (event) => {
+  handleScrollIntent(event.deltaY);
+}, { passive: true });
+window.addEventListener("touchstart", (event) => {
+  lastTouchY = event.touches[0]?.clientY || 0;
+}, { passive: true });
+window.addEventListener("touchmove", (event) => {
+  const currentTouchY = event.touches[0]?.clientY || lastTouchY;
+  handleScrollIntent(lastTouchY - currentTouchY);
+  lastTouchY = currentTouchY;
+}, { passive: true });
 window.addEventListener("pointermove", (event) => {
   pointer.x = event.clientX / Math.max(window.innerWidth, 1);
   pointer.y = event.clientY / Math.max(window.innerHeight, 1);
 });
 
 resizeCanvas();
+setMobileNavVisible(window.innerWidth <= 900);
 drawCanvas();
 
 const gameArena = document.querySelector("#gameArena");

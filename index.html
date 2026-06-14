@@ -10,7 +10,7 @@
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
 
-  <header class="site-header" data-reveal>
+  <header class="site-header">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
       <span class="brand-mark">AP</span>
       <span>Andres Prias</span>
@@ -21,19 +21,17 @@
       <span class="menu-icon" aria-hidden="true"></span>
     </button>
 
-    <nav class="nav" id="mainNav" aria-label="Navegacion principal">
-      <a href="#proyectos">Proyectos</a>
-      <a href="#bug-hunter">Bug Hunter</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#metodo">Metodo</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-
     <a class="header-action" href="mailto:anpriasca@gmail.com" aria-label="Enviar correo a Andres Prias">
       <span>Hablemos</span>
       <span aria-hidden="true">-></span>
     </a>
   </header>
+
+  <nav class="nav" id="mainNav" aria-label="Navegacion principal">
+    <a href="#proyectos">Proyectos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 
   <main>
     <section class="hero" id="inicio">
@@ -89,7 +87,65 @@
       </div>
     </section>
 
-    <section class="intro-band" aria-label="Resumen profesional" data-reveal>
+    <section class="intro-band about-section" aria-label="Resumen profesional" data-reveal>
+      <div class="about-copy">
+        <p class="eyebrow">Sobre mi</p>
+        <h2>Diseño y desarrollo soluciones que se sienten claras desde el primer clic.</h2>
+        <p>
+          Hola, soy Andrés Prias. Un desarrollador de software enfocado en construir experiencias digitales modernas y soluciones prácticas.
+        </p>
+        <div class="stack-list" aria-label="Areas de especialidad">
+          <span>Software a medida</span>
+          <span>Desarrollo web</span>
+          <span>Ecommerce</span>
+          <span>Trazabilidad</span>
+          <span>Marca personal</span>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andres Prias">
+          <button class="about-tab is-active" type="button" role="tab" aria-selected="true" data-about-tab="perfil">Perfil</button>
+          <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="stack">Stack</button>
+          <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="enfoque">Enfoque</button>
+        </div>
+
+        <div class="about-panel is-active" data-about-panel="perfil">
+          <span>01</span>
+          <h3>Perfil profesional</h3>
+          <p>Mi interés por la tecnología me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseño, funcionalidad y una visión orientada a resolver problemas reales.</p>
+        </div>
+
+        <div class="about-panel" data-about-panel="stack">
+          <span>02</span>
+          <h3>Stack en crecimiento</h3>
+          <p>Actualmente continúo fortaleciendo mis habilidades en desarrollo web, ingeniería de software y creación de productos digitales con bases sólidas y mantenibles.</p>
+        </div>
+
+        <div class="about-panel" data-about-panel="enfoque">
+          <span>03</span>
+          <h3>Forma de trabajo</h3>
+          <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prácticas que conecten diseño, datos y operación.</p>
+        </div>
+
+        <div class="about-stats" aria-label="Resumen interactivo">
+          <article>
+            <strong>Web</strong>
+            <span>Interfaces modernas</span>
+          </article>
+          <article>
+            <strong>Software</strong>
+            <span>Sistemas útiles</span>
+          </article>
+          <article>
+            <strong>Producto</strong>
+            <span>Visión real</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-band legacy-about" aria-label="Resumen profesional anterior" data-reveal>
       <div>
         <p>
           Construyo interfaces modernas, automatizaciones y plataformas que conectan operacion, datos y experiencia de usuario.
