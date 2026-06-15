@@ -81,6 +81,22 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
 
 const aboutTabs = document.querySelectorAll("[data-about-tab]");
 const aboutPanels = document.querySelectorAll("[data-about-panel]");
+const themeToggle = document.querySelector(".theme-toggle");
+const savedTheme = localStorage.getItem("andres-prias-theme") || "dark";
+
+function applyTheme(theme) {
+  const nextTheme = theme === "light" ? "light" : "dark";
+  document.body.dataset.theme = nextTheme;
+  themeToggle.setAttribute("aria-pressed", String(nextTheme === "light"));
+  themeToggle.setAttribute("aria-label", nextTheme === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro");
+  localStorage.setItem("andres-prias-theme", nextTheme);
+}
+
+applyTheme(savedTheme);
+
+themeToggle.addEventListener("click", () => {
+  applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
+});
 
 aboutTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
