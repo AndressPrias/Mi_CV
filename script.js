@@ -82,7 +82,30 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
 const aboutTabs = document.querySelectorAll("[data-about-tab]");
 const aboutPanels = document.querySelectorAll("[data-about-panel]");
 const themeToggle = document.querySelector(".theme-toggle");
+const themeRail = document.querySelector(".theme-rail");
+const themeTicks = document.querySelectorAll(".theme-track span");
 const savedTheme = localStorage.getItem("andres-prias-theme") || "dark";
+
+function setThemeTickHeights(pointerX = null) {
+  const railBox = themeRail.getBoundingClientRect();
+  const visibleTicks = Array.from(themeTicks).slice(0, 9);
+
+  visibleTicks.forEach((tick, index) => {
+    const tickCenter = tick.getBoundingClientRect().left + tick.getBoundingClientRect().width / 2;
+    const centerWeight = 1 - Math.min(Math.abs(index - (visibleTicks.length - 1) / 2) / 4, 1);
+    const baseHeight = 16 + centerWeight * 30;
+    let height = baseHeight;
+
+    if (pointerX !== null) {
+      const distance = Math.abs(pointerX - tickCenter);
+      const influence = Math.max(0, 1 - distance / (railBox.width * 0.22));
+      height += influence * 24;
+    }
+
+    tick.style.setProperty("--tick-height", height.toFixed(1));
+    tick.style.opacity = pointerX === null ? "" : String(0.48 + Math.min(height / 58, 1) * 0.52);
+  });
+}
 
 function applyTheme(theme) {
   const nextTheme = theme === "light" ? "light" : "dark";
@@ -97,6 +120,18 @@ applyTheme(savedTheme);
 themeToggle.addEventListener("click", () => {
   applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
 });
+
+themeRail.addEventListener("pointermove", (event) => {
+  themeRail.classList.add("is-tracking");
+  setThemeTickHeights(event.clientX);
+});
+
+themeRail.addEventListener("pointerleave", () => {
+  themeRail.classList.remove("is-tracking");
+  setThemeTickHeights();
+});
+
+setThemeTickHeights();
 
 aboutTabs.forEach((tab) => {
   tab.addEventListener("click", () => {

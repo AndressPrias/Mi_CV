@@ -15,6 +15,8 @@
   --theme-toggle-x: 18%;
   --theme-rail-bg: rgba(6, 7, 10, 0.44);
   --theme-tick: rgba(128, 242, 177, 0.82);
+  --theme-knob-bg: #9be8d2;
+  --theme-knob-icon: #193c35;
 }
 
 body[data-theme="light"] {
@@ -33,6 +35,8 @@ body[data-theme="light"] {
   --theme-toggle-x: 82%;
   --theme-rail-bg: rgba(236, 229, 220, 0.72);
   --theme-tick: rgba(0, 107, 92, 0.72);
+  --theme-knob-bg: #006b5c;
+  --theme-knob-icon: #f1e8dd;
 }
 
 * {
@@ -234,23 +238,23 @@ body[data-theme="light"] .menu-toggle {
 
 .theme-rail {
   position: relative;
-  width: min(620px, 100%);
-  height: 86px;
-  pointer-events: none;
+  width: min(520px, 100%);
+  height: 92px;
+  pointer-events: auto;
 }
 
 .theme-track {
   position: absolute;
   right: 0;
-  bottom: 16px;
+  bottom: 10px;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 34px;
+  height: 46px;
   border-radius: 999px;
   opacity: 0.72;
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   transition: opacity 220ms ease, filter 220ms ease;
 }
 
@@ -262,92 +266,33 @@ body[data-theme="light"] .menu-toggle {
 .theme-track span {
   display: block;
   width: 2px;
-  height: 12px;
+  height: calc(var(--tick-height, 18) * 1px);
   border-radius: 999px;
   background: var(--theme-tick);
   opacity: 0.62;
   transform-origin: center;
-  transition: height 220ms ease, opacity 220ms ease, transform 220ms ease, background 220ms ease;
+  transition: height 110ms ease, opacity 140ms ease, transform 140ms ease, background 220ms ease;
 }
 
-.theme-track span:nth-child(2n) {
-  height: 18px;
-  opacity: 0.78;
-}
-
-.theme-track span:nth-child(3n) {
-  height: 24px;
-}
-
-.theme-track span:nth-child(5n) {
-  height: 30px;
-  opacity: 0.92;
-}
-
-.theme-track span:nth-child(10),
-.theme-track span:nth-child(11),
-.theme-track span:nth-child(12) {
-  height: 34px;
-  opacity: 1;
-}
-
-.theme-rail:hover .theme-track span {
-  height: calc(var(--tick-boost, 1) * 1px);
-  opacity: 1;
-}
-
-.theme-track span:nth-child(1),
-.theme-track span:nth-child(21) {
-  --tick-boost: 14;
+.theme-track span:nth-child(n+10) {
+  display: none;
 }
 
 .theme-track span:nth-child(2),
-.theme-track span:nth-child(20) {
-  --tick-boost: 18;
-}
-
-.theme-track span:nth-child(3),
-.theme-track span:nth-child(19) {
-  --tick-boost: 22;
+.theme-track span:nth-child(8) {
+  height: 26px;
+  opacity: 0.76;
 }
 
 .theme-track span:nth-child(4),
-.theme-track span:nth-child(18) {
-  --tick-boost: 26;
+.theme-track span:nth-child(6) {
+  height: 34px;
+  opacity: 0.86;
 }
 
-.theme-track span:nth-child(5),
-.theme-track span:nth-child(17) {
-  --tick-boost: 30;
-}
-
-.theme-track span:nth-child(6),
-.theme-track span:nth-child(16) {
-  --tick-boost: 34;
-}
-
-.theme-track span:nth-child(7),
-.theme-track span:nth-child(15) {
-  --tick-boost: 38;
-}
-
-.theme-track span:nth-child(8),
-.theme-track span:nth-child(14) {
-  --tick-boost: 42;
-}
-
-.theme-track span:nth-child(9),
-.theme-track span:nth-child(13) {
-  --tick-boost: 46;
-}
-
-.theme-track span:nth-child(10),
-.theme-track span:nth-child(12) {
-  --tick-boost: 50;
-}
-
-.theme-track span:nth-child(11) {
-  --tick-boost: 54;
+.theme-track span:nth-child(5) {
+  height: 46px;
+  opacity: 1;
 }
 
 .theme-track::before {
@@ -363,16 +308,16 @@ body[data-theme="light"] .menu-toggle {
 .theme-toggle {
   position: absolute;
   left: var(--theme-toggle-x);
-  top: 4px;
+  top: 0;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
-  border: 1px solid rgba(128, 242, 177, 0.28);
+  width: 56px;
+  height: 56px;
+  border: 0;
   border-radius: 50%;
-  background: #006b5c;
-  color: #f5eee6;
-  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.24), 0 0 0 8px rgba(0, 107, 92, 0.08);
+  background: var(--theme-knob-bg);
+  color: var(--theme-knob-icon);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18), 0 0 0 8px color-mix(in srgb, var(--theme-knob-bg) 18%, transparent);
   cursor: pointer;
   pointer-events: auto;
   transform: translateX(-50%);
@@ -382,51 +327,60 @@ body[data-theme="light"] .menu-toggle {
 .theme-toggle::after {
   content: "";
   position: absolute;
-  top: 52px;
+  top: 56px;
   width: 2px;
-  height: 32px;
+  height: 38px;
   border-radius: 999px;
   background: var(--theme-tick);
 }
 
 .theme-symbol {
   position: relative;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
 }
 
 .theme-symbol::before,
 .theme-symbol::after {
   content: "";
   position: absolute;
-  border-radius: 50%;
   transition: opacity 220ms ease, transform 260ms ease, box-shadow 260ms ease, background 260ms ease;
 }
 
 .theme-symbol::before {
-  inset: 5px;
-  background: currentColor;
+  top: 8px;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
   box-shadow:
-    0 -10px 0 -7px currentColor,
-    0 10px 0 -7px currentColor,
-    10px 0 0 -7px currentColor,
-    -10px 0 0 -7px currentColor,
-    7px 7px 0 -7px currentColor,
-    -7px -7px 0 -7px currentColor,
-    7px -7px 0 -7px currentColor,
-    -7px 7px 0 -7px currentColor;
+    0 -11px 0 -8px currentColor,
+    0 11px 0 -8px currentColor,
+    11px 0 0 -8px currentColor,
+    -11px 0 0 -8px currentColor,
+    8px 8px 0 -8px currentColor,
+    -8px -8px 0 -8px currentColor,
+    8px -8px 0 -8px currentColor,
+    -8px 8px 0 -8px currentColor;
 }
 
 .theme-symbol::after {
-  inset: 3px;
-  background: currentColor;
+  top: 5px;
+  left: 5px;
+  width: 17px;
+  height: 17px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
   opacity: 0;
   transform: scale(0.72) rotate(-18deg);
 }
 
 body[data-theme="dark"] .theme-toggle {
-  background: #0b1117;
-  color: #80f2b1;
+  background: var(--theme-knob-bg);
+  color: var(--theme-knob-icon);
 }
 
 body[data-theme="dark"] .theme-symbol::before {
@@ -436,8 +390,13 @@ body[data-theme="dark"] .theme-symbol::before {
 
 body[data-theme="dark"] .theme-symbol::after {
   opacity: 1;
-  box-shadow: inset 7px -5px 0 0 #0b1117;
+  box-shadow: inset 7px -4px 0 0 var(--theme-knob-bg);
   transform: scale(1) rotate(-18deg);
+}
+
+body[data-theme="light"] .theme-toggle {
+  background: var(--theme-knob-bg);
+  color: var(--theme-knob-icon);
 }
 
 .hero {
