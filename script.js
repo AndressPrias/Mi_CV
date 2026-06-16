@@ -1,3 +1,4 @@
+/* Ambient canvas background. */
 const canvas = document.querySelector("#ambientCanvas");
 const context = canvas.getContext("2d");
 const pointer = { x: 0.5, y: 0.5 };
@@ -66,27 +67,21 @@ function drawCanvas() {
   requestAnimationFrame(drawCanvas);
 }
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.16 });
-
-document.querySelectorAll("[data-reveal]").forEach((element) => {
-  revealObserver.observe(element);
-});
-
-const aboutTabs = document.querySelectorAll("[data-about-tab]");
-const aboutPanels = document.querySelectorAll("[data-about-panel]");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeRail = document.querySelector(".theme-rail");
 const themeTicks = document.querySelectorAll(".theme-track span");
 const savedTheme = localStorage.getItem("andres-prias-theme") || "dark";
+let revealObserver = null;
+let activeGame = false;
+let score = 0;
+let timeLeft = 30;
+let timerId = null;
+let spawnId = null;
 
+/* Theme switch rail: tick heights react to pointer proximity. */
 function setThemeTickHeights(pointerX = null) {
+  if (!themeRail || !themeTicks.length) return;
+
   const railBox = themeRail.getBoundingClientRect();
   const visibleTicks = Array.from(themeTicks).slice(0, 9);
 
@@ -110,45 +105,79 @@ function setThemeTickHeights(pointerX = null) {
 function applyTheme(theme) {
   const nextTheme = theme === "light" ? "light" : "dark";
   document.body.dataset.theme = nextTheme;
-  themeToggle.setAttribute("aria-pressed", String(nextTheme === "light"));
-  themeToggle.setAttribute("aria-label", nextTheme === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro");
+
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", String(nextTheme === "light"));
+    themeToggle.setAttribute("aria-label", nextTheme === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro");
+  }
+
   localStorage.setItem("andres-prias-theme", nextTheme);
 }
 
 applyTheme(savedTheme);
 
-themeToggle.addEventListener("click", () => {
-  applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
-});
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
+  });
+}
 
-themeRail.addEventListener("pointermove", (event) => {
-  themeRail.classList.add("is-tracking");
-  setThemeTickHeights(event.clientX);
-});
+if (themeRail) {
+  themeRail.addEventListener("pointermove", (event) => {
+    themeRail.classList.add("is-tracking");
+    setThemeTickHeights(event.clientX);
+  });
 
-themeRail.addEventListener("pointerleave", () => {
-  themeRail.classList.remove("is-tracking");
-  setThemeTickHeights();
-});
+  themeRail.addEventListener("pointerleave", () => {
+    themeRail.classList.remove("is-tracking");
+    setThemeTickHeights();
+  });
+}
 
 setThemeTickHeights();
 
-aboutTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const selectedPanel = tab.dataset.aboutTab;
+function initReveal() {
+  if (revealObserver) {
+    revealObserver.disconnect();
+  }
 
-    aboutTabs.forEach((item) => {
-      const isActive = item === tab;
-      item.classList.toggle("is-active", isActive);
-      item.setAttribute("aria-selected", String(isActive));
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.16 });
 
-    aboutPanels.forEach((panel) => {
-      panel.classList.toggle("is-active", panel.dataset.aboutPanel === selectedPanel);
+  document.querySelectorAll("[data-reveal]").forEach((element) => {
+    revealObserver.observe(element);
+  });
+}
+
+/* About tabs. */
+function initAboutTabs() {
+  const aboutTabs = document.querySelectorAll("[data-about-tab]");
+  const aboutPanels = document.querySelectorAll("[data-about-panel]");
+
+  aboutTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const selectedPanel = tab.dataset.aboutTab;
+
+      aboutTabs.forEach((item) => {
+        const isActive = item === tab;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-selected", String(isActive));
+      });
+
+      aboutPanels.forEach((panel) => {
+        panel.classList.toggle("is-active", panel.dataset.aboutPanel === selectedPanel);
+      });
     });
   });
-});
+}
 
+/* Header menu and mobile bottom navigation. */
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector("#mainNav");
@@ -247,22 +276,8 @@ resizeCanvas();
 setMobileNavVisible(window.innerWidth <= 900);
 drawCanvas();
 
-const gameArena = document.querySelector("#gameArena");
-const gameTimer = document.querySelector("#gameTimer");
-const gameScore = document.querySelector("#gameScore");
-const gameBest = document.querySelector("#gameBest");
-const startGame = document.querySelector("#startGame");
-const clearRanking = document.querySelector("#clearRanking");
-const rankingList = document.querySelector("#rankingList");
-const playerName = document.querySelector("#playerName");
-const arenaMessage = document.querySelector("#arenaMessage");
-
+/* Mini Juego: local score game and browser ranking. */
 const rankingKey = "andres-prias-bug-hunter-ranking";
-let activeGame = false;
-let score = 0;
-let timeLeft = 30;
-let timerId = null;
-let spawnId = null;
 
 function readRanking() {
   try {
@@ -276,7 +291,9 @@ function writeRanking(entries) {
   localStorage.setItem(rankingKey, JSON.stringify(entries.slice(0, 5)));
 }
 
-function renderRanking() {
+function renderRanking(gameBest, rankingList) {
+  if (!gameBest || !rankingList) return;
+
   const ranking = readRanking();
   rankingList.innerHTML = "";
   gameBest.textContent = ranking[0]?.score || 0;
@@ -295,17 +312,19 @@ function renderRanking() {
   });
 }
 
-function clearBugs() {
+function clearBugs(gameArena) {
+  if (!gameArena) return;
   gameArena.querySelectorAll(".bug-target").forEach((bug) => bug.remove());
 }
 
-function setMessage(title, detail, visible = true) {
+function setMessage(arenaMessage, title, detail, visible = true) {
+  if (!arenaMessage) return;
   arenaMessage.querySelector("span").textContent = title;
   arenaMessage.querySelector("strong").textContent = detail;
   arenaMessage.classList.toggle("is-hidden", !visible);
 }
 
-function spawnBug() {
+function spawnBug(gameArena, gameScore) {
   if (!activeGame) return;
 
   const bug = document.createElement("button");
@@ -325,7 +344,7 @@ function spawnBug() {
 
   bug.addEventListener("click", () => {
     score += 10;
-    gameScore.textContent = score;
+    if (gameScore) gameScore.textContent = score;
     bug.remove();
   });
 
@@ -333,49 +352,107 @@ function spawnBug() {
   window.setTimeout(() => bug.remove(), 1250);
 }
 
-function finishGame() {
+function finishGame(elements) {
+  const { gameArena, startGame, playerName, arenaMessage, gameBest, rankingList } = elements;
+
   activeGame = false;
   window.clearInterval(timerId);
   window.clearInterval(spawnId);
-  clearBugs();
+  clearBugs(gameArena);
 
   const name = playerName.value.trim() || "Andres";
   const ranking = readRanking();
   ranking.push({ name, score, date: new Date().toISOString() });
   ranking.sort((a, b) => b.score - a.score);
   writeRanking(ranking);
-  renderRanking();
+  renderRanking(gameBest, rankingList);
 
   startGame.textContent = "Iniciar";
-  setMessage("Partida finalizada", `Puntuacion final: ${score}.`);
+  setMessage(arenaMessage, "Partida finalizada", `Puntuacion final: ${score}.`);
 }
 
-function runGame() {
+function runGame(elements) {
+  const { gameArena, gameTimer, gameScore, startGame, arenaMessage } = elements;
+
   activeGame = true;
   score = 0;
   timeLeft = 30;
   gameScore.textContent = score;
   gameTimer.textContent = timeLeft;
   startGame.textContent = "Reiniciar";
-  clearBugs();
-  setMessage("Mini Juego", "Caza todos los bugs posibles.", false);
+  clearBugs(gameArena);
+  setMessage(arenaMessage, "Mini Juego", "Caza todos los bugs posibles.", false);
 
   window.clearInterval(timerId);
   window.clearInterval(spawnId);
-  spawnBug();
-  spawnId = window.setInterval(spawnBug, 650);
+  spawnBug(gameArena, gameScore);
+  spawnId = window.setInterval(() => spawnBug(gameArena, gameScore), 650);
   timerId = window.setInterval(() => {
     timeLeft -= 1;
     gameTimer.textContent = timeLeft;
-    if (timeLeft <= 0) finishGame();
+    if (timeLeft <= 0) finishGame(elements);
   }, 1000);
 }
 
-startGame.addEventListener("click", runGame);
-clearRanking.addEventListener("click", () => {
-  localStorage.removeItem(rankingKey);
-  renderRanking();
-  setMessage("Ranking limpio", "Inicia una nueva partida para registrar tu puntuacion.");
-});
+function initGame() {
+  const elements = {
+    gameArena: document.querySelector("#gameArena"),
+    gameTimer: document.querySelector("#gameTimer"),
+    gameScore: document.querySelector("#gameScore"),
+    gameBest: document.querySelector("#gameBest"),
+    startGame: document.querySelector("#startGame"),
+    clearRanking: document.querySelector("#clearRanking"),
+    rankingList: document.querySelector("#rankingList"),
+    playerName: document.querySelector("#playerName"),
+    arenaMessage: document.querySelector("#arenaMessage")
+  };
 
-renderRanking();
+  if (!elements.gameArena || !elements.startGame) {
+    activeGame = false;
+    window.clearInterval(timerId);
+    window.clearInterval(spawnId);
+    return;
+  }
+
+  elements.startGame.addEventListener("click", () => runGame(elements));
+  elements.clearRanking.addEventListener("click", () => {
+    localStorage.removeItem(rankingKey);
+    renderRanking(elements.gameBest, elements.rankingList);
+    setMessage(elements.arenaMessage, "Ranking limpio", "Inicia una nueva partida para registrar tu puntuacion.");
+  });
+
+  renderRanking(elements.gameBest, elements.rankingList);
+}
+
+function updateCurrentNav() {
+  const currentPage = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll(".nav a").forEach((link) => {
+    const linkPage = new URL(link.href, location.href).pathname.split("/").pop() || "index.html";
+    const isCurrent = linkPage === currentPage;
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function initPage() {
+  updateCurrentNav();
+  initReveal();
+  initAboutTabs();
+  initGame();
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+initPage();
+
+if (window.Swup) {
+  const swup = new Swup({
+    containers: ["#swup"],
+    animationSelector: '[class*="transition-"]'
+  });
+
+  swup.hooks.on("page:view", initPage);
+}

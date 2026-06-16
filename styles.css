@@ -1,3 +1,4 @@
+/* Design tokens: change colors, spacing width, and theme rail values here first. */
 :root {
   color-scheme: dark;
   --bg: #06070a;
@@ -39,12 +40,23 @@ body[data-theme="light"] {
   --theme-knob-icon: #f1e8dd;
 }
 
+/* Base reset and page background. */
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+html.is-changing .transition-main {
+  transition: opacity 260ms ease, transform 320ms ease, filter 320ms ease;
+}
+
+html.is-animating .transition-main {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px) scale(0.985);
 }
 
 body {
@@ -87,6 +99,7 @@ body[data-theme="light"] #ambientCanvas {
   opacity: 0.18;
 }
 
+/* Header, brand, and main navigation. */
 .site-header {
   position: sticky;
   top: 0;
@@ -151,9 +164,17 @@ body[data-theme="light"] .menu-toggle {
   z-index: 11;
   display: flex;
   gap: 4px;
+  width: max-content;
+  max-width: calc(100% - 360px);
+  overflow-x: auto;
   padding: 6px;
   border-radius: 999px;
   transform: translateX(-50%);
+  scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 .menu-toggle {
@@ -212,18 +233,21 @@ body[data-theme="light"] .menu-toggle {
 .nav a,
 .header-action {
   min-height: 38px;
-  padding: 10px 14px;
+  padding: 10px 12px;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
   transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
 }
 
 .nav a {
+  flex: 0 0 auto;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .nav a:hover,
+.nav a[aria-current="page"],
 .header-action:hover {
   color: var(--text);
   background: var(--surface-strong);
@@ -236,6 +260,7 @@ body[data-theme="light"] .menu-toggle {
   border-radius: 999px;
 }
 
+/* Footer theme switch inspired by a draggable rail. */
 .theme-rail {
   position: relative;
   width: min(520px, 100%);
@@ -379,8 +404,8 @@ body[data-theme="light"] .menu-toggle {
 }
 
 body[data-theme="dark"] .theme-toggle {
-  background: var(--theme-knob-bg);
-  color: var(--theme-knob-icon);
+  background: #9be8d2;
+  color: #193c35;
 }
 
 body[data-theme="dark"] .theme-symbol::before {
@@ -390,15 +415,16 @@ body[data-theme="dark"] .theme-symbol::before {
 
 body[data-theme="dark"] .theme-symbol::after {
   opacity: 1;
-  box-shadow: inset 7px -4px 0 0 var(--theme-knob-bg);
+  box-shadow: inset 7px -4px 0 0 #9be8d2;
   transform: scale(1) rotate(-18deg);
 }
 
 body[data-theme="light"] .theme-toggle {
-  background: var(--theme-knob-bg);
-  color: var(--theme-knob-icon);
+  background: #006b5c;
+  color: #f1e8dd;
 }
 
+/* Hero: first screen, profile photo, personal mark, and metrics window. */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
@@ -507,6 +533,33 @@ body[data-theme="light"] .section-heading p:not(.eyebrow) {
 .btn.ghost {
   background: rgba(255, 255, 255, 0.07);
   color: var(--text);
+}
+
+body[data-theme="light"] .btn.primary {
+  border-color: rgba(0, 107, 92, 0.22);
+  background: #006b5c;
+  color: #f8f4ee;
+}
+
+body[data-theme="light"] .btn.ghost,
+body[data-theme="light"] .nav a,
+body[data-theme="light"] .about-tab,
+body[data-theme="light"] .contact-details a,
+body[data-theme="light"] .project-tags span,
+body[data-theme="light"] .stack-list span {
+  border-color: rgba(0, 107, 92, 0.22);
+  background: rgba(0, 107, 92, 0.08);
+  color: #12312f;
+}
+
+body[data-theme="light"] .btn.ghost:hover,
+body[data-theme="light"] .nav a:hover,
+body[data-theme="light"] .nav a[aria-current="page"],
+body[data-theme="light"] .about-tab:hover,
+body[data-theme="light"] .about-tab.is-active {
+  border-color: rgba(0, 107, 92, 0.42);
+  background: rgba(0, 107, 92, 0.16);
+  color: #062522;
 }
 
 .hero-visual {
@@ -653,6 +706,7 @@ body[data-theme="light"] .ranking-list li {
   background: linear-gradient(90deg, var(--coral), rgba(255, 148, 120, 0.08));
 }
 
+/* Shared section spacing and reveal-ready layout. */
 .intro-band,
 .section,
 .method-section,
@@ -683,6 +737,7 @@ body[data-theme="light"] .ranking-list li {
   font-weight: 700;
 }
 
+/* About section: interactive tabs and professional summary. */
 .about-section {
   align-items: stretch;
 }
@@ -854,6 +909,7 @@ body[data-theme="light"] .ranking-list li {
   }
 }
 
+/* Main content sections. */
 .section,
 .method-section {
   padding: 92px 0;
@@ -934,6 +990,7 @@ body[data-theme="light"] .ranking-list li {
   line-height: 1.7;
 }
 
+/* Projects grid. */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -997,6 +1054,11 @@ body[data-theme="light"] .ranking-list li {
   padding: 8px 10px;
 }
 
+.project-link {
+  width: fit-content;
+  margin-top: auto;
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
@@ -1010,6 +1072,7 @@ body[data-theme="light"] .ranking-list li {
   align-items: stretch;
 }
 
+/* Mini Juego: arena, stats, controls, and ranking. */
 .game-panel,
 .ranking-panel {
   border: 1px solid var(--line);
@@ -1190,6 +1253,21 @@ body[data-theme="light"] .ranking-list li {
   font-weight: 700;
 }
 
+body[data-theme="light"] .player-field input,
+body[data-theme="light"] .ranking-list li,
+body[data-theme="light"] .about-stats article {
+  border-color: rgba(0, 107, 92, 0.18);
+  background: rgba(255, 255, 255, 0.62);
+  color: #12312f;
+}
+
+body[data-theme="light"] .game-stats strong,
+body[data-theme="light"] .metric-grid strong,
+body[data-theme="light"] .ranking-heading strong,
+body[data-theme="light"] .about-stats strong {
+  color: #062522;
+}
+
 .player-field input:focus {
   border-color: rgba(128, 242, 177, 0.72);
 }
@@ -1248,6 +1326,7 @@ body[data-theme="light"] .ranking-list li {
   margin-bottom: 0;
 }
 
+/* Services and method timeline. */
 .service-list {
   display: grid;
   gap: 12px;
@@ -1286,6 +1365,7 @@ body[data-theme="light"] .ranking-list li {
   border-right: 0;
 }
 
+/* Contact and footer. */
 .contact-section {
   position: relative;
   overflow: hidden;
@@ -1365,6 +1445,17 @@ body[data-theme="light"] .ranking-list li {
   opacity: 1;
 }
 
+@media (max-width: 1180px) and (min-width: 901px) {
+  .header-action {
+    display: none;
+  }
+
+  .nav {
+    max-width: calc(100% - 220px);
+  }
+}
+
+/* Tablet and mobile layout, including bottom navigation behavior. */
 @media (max-width: 900px) {
   .theme-rail {
     width: min(520px, calc(100% - 32px));
@@ -1402,8 +1493,8 @@ body[data-theme="light"] .ranking-list li {
     left: 16px;
     z-index: 20;
     width: auto;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: none;
+    display: flex;
     gap: 8px;
     max-height: none;
     padding: 8px;
@@ -1412,6 +1503,8 @@ body[data-theme="light"] .ranking-list li {
     background: rgba(6, 7, 10, 0.9);
     box-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
     backdrop-filter: blur(18px);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
     opacity: 0;
     pointer-events: none;
     transform: translateY(calc(100% + 24px));
@@ -1428,9 +1521,12 @@ body[data-theme="light"] .ranking-list li {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
+    min-width: 104px;
     min-height: 44px;
     padding: 11px 10px;
     background: rgba(255, 255, 255, 0.055);
+    scroll-snap-align: center;
     text-align: center;
   }
 
@@ -1520,6 +1616,7 @@ body[data-theme="light"] .ranking-list li {
   }
 }
 
+/* Small phones. */
 @media (max-width: 620px) {
   .theme-rail {
     width: 100%;
