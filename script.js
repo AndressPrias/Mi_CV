@@ -74,9 +74,22 @@ const savedTheme = localStorage.getItem("andres-prias-theme") || "dark";
 let revealObserver = null;
 let activeGame = false;
 let score = 0;
-let timeLeft = 30;
-let timerId = null;
-let spawnId = null;
+let timeLeft = 40;
+let gameFrameId = null;
+let gameState = null;
+const gameKeys = new Set();
+
+window.addEventListener("keydown", (event) => {
+  const key = event.key.toLowerCase();
+  if (activeGame && ["arrowleft", "arrowright", "a", "d"].includes(key)) {
+    event.preventDefault();
+    gameKeys.add(key);
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  gameKeys.delete(event.key.toLowerCase());
+});
 
 /* Theme switch rail: tick heights react to pointer proximity. */
 function setThemeTickHeights(pointerX = null) {
@@ -276,8 +289,8 @@ resizeCanvas();
 setMobileNavVisible(window.innerWidth <= 900);
 drawCanvas();
 
-/* Mini Juego: local score game and browser ranking. */
-const rankingKey = "andres-prias-bug-hunter-ranking";
+/* Defensa Cósmica: arcade shooter and local browser ranking. */
+const rankingKey = "andres-prias-space-defender-ranking";
 
 function readRanking() {
   try {
@@ -307,14 +320,19 @@ function renderRanking(gameBest, rankingList) {
 
   ranking.forEach((entry, index) => {
     const item = document.createElement("li");
-    item.innerHTML = `<span>${index + 1}. ${entry.name}</span><strong>${entry.score}</strong>`;
+    const name = document.createElement("span");
+    const points = document.createElement("strong");
+    name.textContent = `${index + 1}. ${entry.name}`;
+    points.textContent = entry.score;
+    item.append(name, points);
     rankingList.append(item);
   });
 }
 
-function clearBugs(gameArena) {
+function clearGameObjects(gameArena) {
   if (!gameArena) return;
-  gameArena.querySelectorAll(".bug-target").forEach((bug) => bug.remove());
+  gameArena.querySelectorAll(".player-ship, .enemy-fighter, .laser-shot, .space-explosion").forEach((item) => item.remove());
+  gameArena.classList.remove("is-hit");
 }
 
 function setMessage(arenaMessage, title, detail, visible = true) {
@@ -324,74 +342,220 @@ function setMessage(arenaMessage, title, detail, visible = true) {
   arenaMessage.classList.toggle("is-hidden", !visible);
 }
 
-function spawnBug(gameArena, gameScore) {
-  if (!activeGame) return;
-
-  const bug = document.createElement("button");
-  const core = document.createElement("span");
-  const bounds = gameArena.getBoundingClientRect();
-  const size = 46;
-  const maxX = Math.max(bounds.width - size - 16, 24);
-  const maxY = Math.max(bounds.height - size - 16, 24);
-
-  bug.type = "button";
-  bug.className = "bug-target";
-  bug.setAttribute("aria-label", "Capturar bug");
-  bug.style.left = `${12 + Math.random() * maxX}px`;
-  bug.style.top = `${12 + Math.random() * maxY}px`;
-  core.className = "bug-core";
-  bug.append(core);
-
-  bug.addEventListener("click", () => {
-    score += 10;
-    if (gameScore) gameScore.textContent = score;
-    bug.remove();
-  });
-
-  gameArena.append(bug);
-  window.setTimeout(() => bug.remove(), 1250);
+function createPlayer(gameArena) {
+  const player = document.createElement("div");
+  player.className = "player-ship";
+  player.setAttribute("aria-hidden", "true");
+  gameArena.append(player);
+  return player;
 }
 
-function finishGame(elements) {
-  const { gameArena, startGame, playerName, arenaMessage, gameBest, rankingList } = elements;
+function positionGameObject(element, x, y) {
+  element.dataset.x = x;
+  element.dataset.y = y;
+  element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+}
+
+function spawnEnemy(state, timestamp) {
+  const { gameArena } = state.elements;
+  const bounds = gameArena.getBoundingClientRect();
+  const variant = 1 + Math.floor(Math.random() * 4);
+  const enemy = document.createElement("div");
+  const baseX = 8 + Math.random() * Math.max(bounds.width - 62, 20);
+  const elapsed = (timestamp - state.startTime) / 1000;
+
+  enemy.className = `enemy-fighter color-${variant}`;
+  enemy.dataset.baseX = baseX;
+  enemy.dataset.speed = 72 + Math.random() * 58 + elapsed * 1.8;
+  enemy.dataset.phase = Math.random() * Math.PI * 2;
+  enemy.dataset.sway = 8 + Math.random() * 20;
+  enemy.dataset.points = 8 + variant * 4;
+  enemy.setAttribute("aria-hidden", "true");
+  positionGameObject(enemy, baseX, -48);
+  gameArena.append(enemy);
+}
+
+function fireLaser(state) {
+  const shot = document.createElement("span");
+  const bounds = state.elements.gameArena.getBoundingClientRect();
+  const x = state.playerX + 24;
+  const y = bounds.height - 102;
+  shot.className = "laser-shot";
+  shot.setAttribute("aria-hidden", "true");
+  positionGameObject(shot, x, y);
+  state.elements.gameArena.append(shot);
+}
+
+function createExplosion(gameArena, x, y) {
+  const explosion = document.createElement("span");
+  explosion.className = "space-explosion";
+  positionGameObject(explosion, x, y);
+  gameArena.append(explosion);
+  window.setTimeout(() => explosion.remove(), 340);
+}
+
+function rectanglesOverlap(a, b) {
+  return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+}
+
+function damageShield(state) {
+  if (!activeGame) return;
+  state.shield -= 1;
+  state.elements.gameShield.textContent = state.shield;
+  state.elements.gameArena.classList.remove("is-hit");
+  void state.elements.gameArena.offsetWidth;
+  state.elements.gameArena.classList.add("is-hit");
+  window.setTimeout(() => state.elements.gameArena?.classList.remove("is-hit"), 240);
+
+  if (state.shield <= 0) {
+    finishGame(state.elements, "Escudo agotado");
+  }
+}
+
+function updateEnemies(state, delta, timestamp) {
+  const arenaHeight = state.elements.gameArena.clientHeight;
+  const elapsed = (timestamp - state.startTime) / 1000;
+
+  state.elements.gameArena.querySelectorAll(".enemy-fighter").forEach((enemy) => {
+    if (!enemy.isConnected || !activeGame) return;
+    const y = Number(enemy.dataset.y) + Number(enemy.dataset.speed) * delta;
+    const baseX = Number(enemy.dataset.baseX);
+    const x = baseX + Math.sin(elapsed * 2.4 + Number(enemy.dataset.phase)) * Number(enemy.dataset.sway);
+    positionGameObject(enemy, x, y);
+
+    if (y > arenaHeight + 12) {
+      enemy.remove();
+      damageShield(state);
+    }
+  });
+}
+
+function updateLasers(state, delta) {
+  state.elements.gameArena.querySelectorAll(".laser-shot").forEach((shot) => {
+    const y = Number(shot.dataset.y) - 560 * delta;
+    positionGameObject(shot, Number(shot.dataset.x), y);
+    if (y < -24) shot.remove();
+  });
+}
+
+function detectHits(state) {
+  const shots = Array.from(state.elements.gameArena.querySelectorAll(".laser-shot"));
+  const enemies = Array.from(state.elements.gameArena.querySelectorAll(".enemy-fighter"));
+
+  shots.forEach((shot) => {
+    if (!shot.isConnected) return;
+    const shotBox = { x: Number(shot.dataset.x), y: Number(shot.dataset.y), width: 4, height: 18 };
+
+    enemies.forEach((enemy) => {
+      if (!shot.isConnected || !enemy.isConnected) return;
+      const enemyBox = { x: Number(enemy.dataset.x), y: Number(enemy.dataset.y), width: 46, height: 42 };
+
+      if (rectanglesOverlap(shotBox, enemyBox)) {
+        score += Number(enemy.dataset.points);
+        state.elements.gameScore.textContent = score;
+        createExplosion(state.elements.gameArena, enemyBox.x + 16, enemyBox.y + 12);
+        shot.remove();
+        enemy.remove();
+      }
+    });
+  });
+}
+
+function gameLoop(timestamp) {
+  if (!activeGame || !gameState) return;
+
+  const state = gameState;
+  const bounds = state.elements.gameArena.getBoundingClientRect();
+  const delta = state.lastFrameTime ? Math.min((timestamp - state.lastFrameTime) / 1000, 0.04) : 0;
+  const elapsed = (timestamp - state.startTime) / 1000;
+  state.lastFrameTime = timestamp;
+
+  if (gameKeys.has("arrowleft") || gameKeys.has("a")) state.playerX -= 290 * delta;
+  if (gameKeys.has("arrowright") || gameKeys.has("d")) state.playerX += 290 * delta;
+  if (state.targetX !== null) state.playerX += (state.targetX - state.playerX) * Math.min(delta * 14, 1);
+  state.playerX = Math.max(4, Math.min(bounds.width - 56, state.playerX));
+  state.player.style.left = `${state.playerX}px`;
+
+  const spawnDelay = Math.max(330, 760 - elapsed * 8);
+  if (timestamp - state.lastSpawnAt >= spawnDelay) {
+    spawnEnemy(state, timestamp);
+    state.lastSpawnAt = timestamp;
+  }
+
+  if (timestamp - state.lastShotAt >= 280) {
+    fireLaser(state);
+    state.lastShotAt = timestamp;
+  }
+
+  updateEnemies(state, delta, timestamp);
+  if (!activeGame) return;
+  updateLasers(state, delta);
+  detectHits(state);
+
+  const nextTime = Math.max(0, 40 - Math.floor(elapsed));
+  if (nextTime !== timeLeft) {
+    timeLeft = nextTime;
+    state.elements.gameTimer.textContent = timeLeft;
+  }
+
+  if (timeLeft <= 0) {
+    finishGame(state.elements, "Sector protegido");
+    return;
+  }
+
+  gameFrameId = window.requestAnimationFrame(gameLoop);
+}
+
+function finishGame(elements, reason) {
+  if (!activeGame) return;
 
   activeGame = false;
-  window.clearInterval(timerId);
-  window.clearInterval(spawnId);
-  clearBugs(gameArena);
+  window.cancelAnimationFrame(gameFrameId);
+  gameKeys.clear();
 
-  const name = playerName.value.trim() || "Andrés";
+  const name = elements.playerName.value.trim() || "Andrés";
   const ranking = readRanking();
   ranking.push({ name, score, date: new Date().toISOString() });
   ranking.sort((a, b) => b.score - a.score);
   writeRanking(ranking);
-  renderRanking(gameBest, rankingList);
+  renderRanking(elements.gameBest, elements.rankingList);
+  clearGameObjects(elements.gameArena);
 
-  startGame.textContent = "Iniciar";
-  setMessage(arenaMessage, "Partida finalizada", `Puntuacion final: ${score}.`);
+  elements.startGame.textContent = "Despegar";
+  setMessage(elements.arenaMessage, reason, `Puntuación final: ${score}.`);
+  gameState = null;
 }
 
 function runGame(elements) {
-  const { gameArena, gameTimer, gameScore, startGame, arenaMessage } = elements;
+  activeGame = false;
+  window.cancelAnimationFrame(gameFrameId);
+  clearGameObjects(elements.gameArena);
 
   activeGame = true;
   score = 0;
-  timeLeft = 30;
-  gameScore.textContent = score;
-  gameTimer.textContent = timeLeft;
-  startGame.textContent = "Reiniciar";
-  clearBugs(gameArena);
-  setMessage(arenaMessage, "Mini Juego", "Caza todos los bugs posibles.", false);
+  timeLeft = 40;
+  elements.gameScore.textContent = score;
+  elements.gameTimer.textContent = timeLeft;
+  elements.gameShield.textContent = 3;
+  elements.startGame.textContent = "Reiniciar";
+  setMessage(elements.arenaMessage, "Defensa Cósmica", "Protege el sector y destruye la flota.", false);
 
-  window.clearInterval(timerId);
-  window.clearInterval(spawnId);
-  spawnBug(gameArena, gameScore);
-  spawnId = window.setInterval(() => spawnBug(gameArena, gameScore), 650);
-  timerId = window.setInterval(() => {
-    timeLeft -= 1;
-    gameTimer.textContent = timeLeft;
-    if (timeLeft <= 0) finishGame(elements);
-  }, 1000);
+  const player = createPlayer(elements.gameArena);
+  const bounds = elements.gameArena.getBoundingClientRect();
+  const now = performance.now();
+  gameState = {
+    elements,
+    player,
+    playerX: Math.max(4, bounds.width / 2 - 26),
+    targetX: null,
+    shield: 3,
+    startTime: now,
+    lastFrameTime: 0,
+    lastSpawnAt: now - 500,
+    lastShotAt: now - 200
+  };
+  player.style.left = `${gameState.playerX}px`;
+  gameFrameId = window.requestAnimationFrame(gameLoop);
 }
 
 function initGame() {
@@ -399,6 +563,7 @@ function initGame() {
     gameArena: document.querySelector("#gameArena"),
     gameTimer: document.querySelector("#gameTimer"),
     gameScore: document.querySelector("#gameScore"),
+    gameShield: document.querySelector("#gameShield"),
     gameBest: document.querySelector("#gameBest"),
     startGame: document.querySelector("#startGame"),
     clearRanking: document.querySelector("#clearRanking"),
@@ -409,16 +574,25 @@ function initGame() {
 
   if (!elements.gameArena || !elements.startGame) {
     activeGame = false;
-    window.clearInterval(timerId);
-    window.clearInterval(spawnId);
+    window.cancelAnimationFrame(gameFrameId);
+    gameState = null;
     return;
   }
 
   elements.startGame.addEventListener("click", () => runGame(elements));
+  const setTarget = (event) => {
+    if (!activeGame || !gameState) return;
+    const bounds = elements.gameArena.getBoundingClientRect();
+    gameState.targetX = Math.max(4, Math.min(bounds.width - 56, event.clientX - bounds.left - 26));
+  };
+  elements.gameArena.addEventListener("pointerdown", setTarget);
+  elements.gameArena.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "mouse" || event.buttons > 0) setTarget(event);
+  });
   elements.clearRanking.addEventListener("click", () => {
     localStorage.removeItem(rankingKey);
     renderRanking(elements.gameBest, elements.rankingList);
-    setMessage(elements.arenaMessage, "Ranking limpio", "Inicia una nueva partida para registrar tu puntuación.");
+    setMessage(elements.arenaMessage, "Ranking limpio", "Despega para registrar una nueva puntuación.");
   });
 
   renderRanking(elements.gameBest, elements.rankingList);

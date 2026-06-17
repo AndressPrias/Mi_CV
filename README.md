@@ -35,7 +35,7 @@ http://127.0.0.1:4173/
 - Nombre, descripción principal y botones de presentación: busca `section class="hero"` en `sobre-mi.html`.
 - Texto de Sobre mí: busca `about-section` en `sobre-mi.html`.
 - Proyectos: busca `project-card` en `proyectos.html`.
-- Mini Juego: busca `id="bug-hunter"` en `mini-juego.html` y `rankingKey` en `script.js`.
+- Mini Juego: busca `id="defensa-cosmica"` en `mini-juego.html` y `rankingKey` en `script.js`.
 - Servicios: busca `id="servicios"` en `servicios.html`.
 - Método: busca `id="metodo"` en `servicios.html`.
 - Contacto: busca `id="contacto"` en `contacto.html`.

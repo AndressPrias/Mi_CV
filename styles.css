@@ -112,11 +112,11 @@ body[data-theme="light"] #ambientCanvas {
   margin: 0 auto;
   padding: 12px 0;
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .brand,
-.header-action,
-.nav {
+.header-action {
   border: 1px solid var(--line);
   background: rgba(6, 7, 10, 0.76);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
@@ -124,7 +124,6 @@ body[data-theme="light"] #ambientCanvas {
 
 body[data-theme="light"] .brand,
 body[data-theme="light"] .header-action,
-body[data-theme="light"] .nav,
 body[data-theme="light"] .menu-toggle {
   background: rgba(248, 244, 238, 0.76);
   box-shadow: 0 12px 34px rgba(52, 46, 38, 0.12);
@@ -168,7 +167,11 @@ body[data-theme="light"] .menu-toggle {
   max-width: calc(100% - 360px);
   overflow-x: auto;
   padding: 6px;
+  border: 0;
   border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
   transform: translateX(-50%);
   scrollbar-width: none;
 }
@@ -242,15 +245,25 @@ body[data-theme="light"] .menu-toggle {
 
 .nav a {
   flex: 0 0 auto;
+  border: 0;
   border-radius: 999px;
+  background: transparent;
   white-space: nowrap;
 }
 
 .nav a:hover,
-.nav a[aria-current="page"],
 .header-action:hover {
   color: var(--text);
   background: var(--surface-strong);
+}
+
+.nav a:hover {
+  background: transparent;
+}
+
+.nav a[aria-current="page"] {
+  color: var(--green);
+  background: transparent;
 }
 
 .header-action {
@@ -525,7 +538,6 @@ body[data-theme="light"] .btn.primary {
 }
 
 body[data-theme="light"] .btn.ghost,
-body[data-theme="light"] .nav a,
 body[data-theme="light"] .about-tab,
 body[data-theme="light"] .contact-details a,
 body[data-theme="light"] .project-tags span,
@@ -536,13 +548,24 @@ body[data-theme="light"] .stack-list span {
 }
 
 body[data-theme="light"] .btn.ghost:hover,
-body[data-theme="light"] .nav a:hover,
-body[data-theme="light"] .nav a[aria-current="page"],
 body[data-theme="light"] .about-tab:hover,
 body[data-theme="light"] .about-tab.is-active {
   border-color: rgba(0, 107, 92, 0.42);
   background: rgba(0, 107, 92, 0.16);
   color: #062522;
+}
+
+body[data-theme="light"] .nav a,
+body[data-theme="light"] .nav a:hover {
+  border-color: transparent;
+  background: transparent;
+  color: #12312f;
+}
+
+body[data-theme="light"] .nav a[aria-current="page"] {
+  border-color: transparent;
+  background: transparent;
+  color: #006b5c;
 }
 
 .hero-visual {
@@ -910,42 +933,28 @@ body[data-theme="light"] .ranking-list li {
   gap: 16px;
 }
 
-.scope-icon {
+.space-icon {
   position: relative;
   display: inline-grid;
   place-items: center;
   width: 54px;
   height: 54px;
   flex: 0 0 auto;
-  border: 2px solid var(--green);
+  border: 2px solid #67d4ff;
   border-radius: 50%;
-  box-shadow: 0 0 0 8px rgba(128, 242, 177, 0.08), 0 0 34px rgba(103, 212, 255, 0.24);
+  background: radial-gradient(circle at 35% 30%, #ffef8a, #ff5b9f 38%, #6837db 70%, #17284f);
+  box-shadow: 0 0 0 8px rgba(103, 212, 255, 0.08), 0 0 34px rgba(255, 91, 159, 0.3);
 }
 
-.scope-icon::before,
-.scope-icon::after {
+.space-icon::before {
   content: "";
   position: absolute;
-  background: var(--green);
-  border-radius: 999px;
-}
-
-.scope-icon::before {
-  width: 30px;
-  height: 2px;
-}
-
-.scope-icon::after {
-  width: 2px;
-  height: 30px;
-}
-
-.scope-icon {
-  background:
-    radial-gradient(circle, var(--green) 0 3px, transparent 4px),
-    linear-gradient(var(--green), var(--green)) center / 2px 100% no-repeat,
-    linear-gradient(90deg, var(--green), var(--green)) center / 100% 2px no-repeat,
-    rgba(128, 242, 177, 0.055);
+  width: 24px;
+  height: 31px;
+  border-radius: 50% 50% 38% 38%;
+  background: linear-gradient(90deg, #e8fbff, #67d4ff 48%, #ffffff 52%, #80f2b1);
+  clip-path: polygon(50% 0, 100% 72%, 72% 64%, 62% 100%, 38% 100%, 28% 64%, 0 72%);
+  transform: rotate(18deg);
 }
 
 .section-heading {
@@ -1048,7 +1057,7 @@ body[data-theme="light"] .ranking-list li {
   gap: 52px;
 }
 
-.bug-game {
+.space-game {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 310px;
   gap: 16px;
@@ -1072,7 +1081,7 @@ body[data-theme="light"] .ranking-list li {
 
 .game-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-bottom: 1px solid var(--line);
 }
 
@@ -1107,12 +1116,24 @@ body[data-theme="light"] .ranking-list li {
   position: relative;
   height: 430px;
   overflow: hidden;
+  touch-action: none;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    radial-gradient(circle at 70% 20%, rgba(128, 242, 177, 0.16), transparent 18rem),
-    rgba(5, 7, 11, 0.74);
-  background-size: 34px 34px, 34px 34px, auto, auto;
+    radial-gradient(circle at 18% 22%, rgba(255, 209, 102, 0.95) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 35%, rgba(103, 212, 255, 0.9) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 44% 72%, rgba(255, 255, 255, 0.82) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 12%, rgba(255, 91, 159, 0.32), transparent 11rem),
+    radial-gradient(circle at 14% 88%, rgba(80, 237, 255, 0.25), transparent 13rem),
+    linear-gradient(165deg, #090525 0%, #11134a 48%, #071426 100%);
+  background-size: 94px 94px, 137px 137px, 72px 72px, auto, auto, auto;
+  cursor: crosshair;
+}
+
+.game-arena::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(103, 212, 255, 0.05) 70%, rgba(128, 242, 177, 0.14) 100%);
+  pointer-events: none;
 }
 
 .arena-message {
@@ -1148,70 +1169,109 @@ body[data-theme="light"] .ranking-list li {
   opacity: 0;
 }
 
-.bug-target {
+.player-ship,
+.enemy-fighter,
+.laser-shot,
+.space-explosion {
   position: absolute;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(128, 242, 177, 0.65);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 38% 34%, rgba(255, 255, 255, 0.86), transparent 0.22rem),
-    radial-gradient(circle at 62% 34%, rgba(255, 255, 255, 0.86), transparent 0.22rem),
-    linear-gradient(135deg, var(--green), var(--blue));
-  box-shadow: 0 0 0 8px rgba(128, 242, 177, 0.08), 0 16px 34px rgba(103, 212, 255, 0.22);
-  cursor: pointer;
-  animation: bugIn 180ms ease-out both, bugPulse 900ms ease-in-out infinite;
+  pointer-events: none;
 }
 
-.bug-target::before,
-.bug-target::after {
+.player-ship {
+  z-index: 6;
+  bottom: 20px;
+  width: 52px;
+  height: 62px;
+  border-radius: 50% 50% 35% 35%;
+  background: linear-gradient(90deg, #5ae7ff, #f8ffff 42%, #ffffff 58%, #80f2b1);
+  clip-path: polygon(50% 0, 76% 38%, 100% 76%, 68% 66%, 61% 100%, 39% 100%, 32% 66%, 0 76%, 24% 38%);
+  filter: drop-shadow(0 0 8px #67d4ff) drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+.player-ship::before {
   content: "";
   position: absolute;
-  top: 12px;
-  width: 18px;
-  height: 2px;
+  top: 18px;
+  left: 20px;
+  width: 12px;
+  height: 18px;
+  border-radius: 50% 50% 35% 35%;
+  background: linear-gradient(#fff5a6, #ff5b9f);
+  box-shadow: 0 0 10px #ff5b9f;
+}
+
+.player-ship::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 20px;
+  width: 12px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(#ffffff, #67d4ff 45%, transparent);
+  filter: blur(1px);
+  animation: enginePulse 160ms ease-in-out infinite alternate;
+}
+
+.enemy-fighter {
+  z-index: 4;
+  width: 46px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--enemy-a), var(--enemy-b));
+  clip-path: polygon(50% 100%, 37% 65%, 0 83%, 16% 40%, 35% 30%, 50% 0, 65% 30%, 84% 40%, 100% 83%, 63% 65%);
+  filter: drop-shadow(0 0 8px var(--enemy-a));
+}
+
+.enemy-fighter::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  width: 10px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 8px #ffffff;
+}
+
+.enemy-fighter.color-1 { --enemy-a: #ff5b9f; --enemy-b: #ff9a62; }
+.enemy-fighter.color-2 { --enemy-a: #8a5cff; --enemy-b: #52e5ff; }
+.enemy-fighter.color-3 { --enemy-a: #ffe56b; --enemy-b: #64f2a7; }
+.enemy-fighter.color-4 { --enemy-a: #ff6b6b; --enemy-b: #b83bff; }
+
+.laser-shot {
+  z-index: 5;
+  width: 4px;
+  height: 18px;
   border-radius: 999px;
-  background: rgba(6, 7, 10, 0.72);
+  background: #ffffff;
+  box-shadow: 0 0 5px #ffffff, 0 0 12px #52e5ff, 0 0 20px #52e5ff;
 }
 
-.bug-target::before {
-  left: -8px;
-  transform: rotate(26deg);
+.space-explosion {
+  z-index: 7;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 8px #ffe56b, 0 0 0 18px rgba(255, 91, 159, 0.62), 0 0 36px 26px rgba(82, 229, 255, 0.34);
+  animation: spaceBurst 320ms ease-out forwards;
 }
 
-.bug-target::after {
-  right: -8px;
-  transform: rotate(-26deg);
+.game-arena.is-hit {
+  animation: arenaHit 220ms ease-out;
 }
 
-.bug-core {
-  width: 16px;
-  height: 20px;
-  border-radius: 999px;
-  background: rgba(6, 7, 10, 0.72);
+@keyframes enginePulse {
+  to { transform: scaleY(1.35); opacity: 0.7; }
 }
 
-@keyframes bugIn {
-  from {
-    transform: scale(0.55);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+@keyframes spaceBurst {
+  to { transform: scale(1.8); opacity: 0; }
 }
 
-@keyframes bugPulse {
-  0%,
-  100% {
-    filter: saturate(1);
-  }
-  50% {
-    filter: saturate(1.35);
-  }
+@keyframes arenaHit {
+  50% { box-shadow: inset 0 0 0 4px rgba(255, 91, 159, 0.8), inset 0 0 55px rgba(255, 91, 159, 0.45); }
 }
 
 .game-controls {
@@ -1477,17 +1537,18 @@ body[data-theme="light"] .about-stats strong {
     z-index: 20;
     width: auto;
     max-width: none;
-    display: flex;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
     max-height: none;
-    padding: 8px;
-    border-radius: 999px;
-    border-color: var(--line);
-    background: rgba(6, 7, 10, 0.9);
-    box-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
-    backdrop-filter: blur(18px);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
+    padding: 4px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: visible;
     opacity: 0;
     pointer-events: none;
     transform: translateY(calc(100% + 24px));
@@ -1504,18 +1565,50 @@ body[data-theme="light"] .about-stats strong {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 auto;
-    min-width: 104px;
-    min-height: 44px;
-    padding: 11px 10px;
-    background: rgba(255, 255, 255, 0.055);
-    scroll-snap-align: center;
+    min-width: 0;
+    min-height: 42px;
+    padding: 6px 3px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    background: rgba(6, 7, 10, 0.86);
+    color: #f7f8fb;
+    font-size: 0.72rem;
+    line-height: 1.08;
+    white-space: normal;
     text-align: center;
+  }
+
+  .nav a:hover {
+    border-color: rgba(128, 242, 177, 0.42);
+    background: rgba(16, 21, 26, 0.94);
+  }
+
+  .nav a[aria-current="page"] {
+    border-color: rgba(128, 242, 177, 0.62);
+    background: #17342c;
+    color: #9ff4c2;
+  }
+
+  body[data-theme="light"] .nav a {
+    border-color: rgba(6, 49, 46, 0.18);
+    background: rgba(248, 244, 238, 0.94);
+    color: #12312f;
+  }
+
+  body[data-theme="light"] .nav a:hover {
+    border-color: rgba(0, 107, 92, 0.38);
+    background: #e2eee9;
+  }
+
+  body[data-theme="light"] .nav a[aria-current="page"] {
+    border-color: #006b5c;
+    background: #006b5c;
+    color: #f8f4ee;
   }
 
   .hero,
   .intro-band,
-  .bug-game,
+  .space-game,
   .split {
     grid-template-columns: 1fr;
   }
@@ -1642,14 +1735,14 @@ body[data-theme="light"] .about-stats strong {
   .nav {
     right: 12px;
     left: 12px;
-    gap: 6px;
+    gap: 1px;
   }
 
   .nav a {
     justify-content: center;
-    min-height: 46px;
-    padding-inline: 8px;
-    font-size: 0.82rem;
+    min-height: 44px;
+    padding-inline: 2px;
+    font-size: 0.67rem;
   }
 
   h1 {
@@ -1709,10 +1802,13 @@ body[data-theme="light"] .about-stats strong {
   }
 
   .metric-grid,
-  .game-stats,
   .game-controls,
   .timeline {
     grid-template-columns: 1fr;
+  }
+
+  .game-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .profile-frame {
@@ -1729,11 +1825,14 @@ body[data-theme="light"] .about-stats strong {
 
   .game-stats article {
     min-height: 86px;
-    border-right: 0;
     border-bottom: 1px solid var(--line);
   }
 
-  .game-stats article:last-child {
+  .game-stats article:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .game-stats article:nth-last-child(-n + 2) {
     border-bottom: 0;
   }
 
