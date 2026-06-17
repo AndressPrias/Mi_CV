@@ -361,46 +361,20 @@ body[data-theme="light"] .menu-toggle {
 
 .theme-symbol {
   position: relative;
+  display: grid;
+  place-items: center;
   width: 28px;
   height: 28px;
 }
 
-.theme-symbol::before,
-.theme-symbol::after {
-  content: "";
+.theme-icon {
   position: absolute;
-  transition: opacity 220ms ease, transform 260ms ease, box-shadow 260ms ease, background 260ms ease;
-}
-
-.theme-symbol::before {
-  top: 8px;
-  left: 8px;
-  width: 12px;
-  height: 12px;
-  border: 3px solid currentColor;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow:
-    0 -11px 0 -8px currentColor,
-    0 11px 0 -8px currentColor,
-    11px 0 0 -8px currentColor,
-    -11px 0 0 -8px currentColor,
-    8px 8px 0 -8px currentColor,
-    -8px -8px 0 -8px currentColor,
-    8px -8px 0 -8px currentColor,
-    -8px 8px 0 -8px currentColor;
-}
-
-.theme-symbol::after {
-  top: 5px;
-  left: 5px;
-  width: 17px;
-  height: 17px;
-  border: 3px solid currentColor;
-  border-radius: 50%;
-  background: transparent;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
   opacity: 0;
-  transform: scale(0.72) rotate(-18deg);
+  transform: scale(0.72) rotate(-16deg);
+  transition: opacity 220ms ease, transform 260ms ease;
 }
 
 body[data-theme="dark"] .theme-toggle {
@@ -408,20 +382,29 @@ body[data-theme="dark"] .theme-toggle {
   color: #193c35;
 }
 
-body[data-theme="dark"] .theme-symbol::before {
-  opacity: 0;
-  transform: scale(0.72) rotate(18deg);
+body[data-theme="dark"] .theme-icon-light {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
-body[data-theme="dark"] .theme-symbol::after {
-  opacity: 1;
-  box-shadow: inset 7px -4px 0 0 #9be8d2;
-  transform: scale(1) rotate(-18deg);
+body[data-theme="dark"] .theme-icon-dark {
+  opacity: 0;
+  transform: scale(0.72) rotate(16deg);
 }
 
 body[data-theme="light"] .theme-toggle {
   background: #006b5c;
   color: #f1e8dd;
+}
+
+body[data-theme="light"] .theme-icon-dark {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+body[data-theme="light"] .theme-icon-light {
+  opacity: 0;
+  transform: scale(0.72) rotate(-16deg);
 }
 
 /* Hero: first screen, profile photo, personal mark, and metrics window. */

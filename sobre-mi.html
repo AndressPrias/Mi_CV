@@ -3,55 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Perfil profesional de Andres Prias, desarrollador de software enfocado en experiencias digitales modernas y soluciones practicas.">
-  <title>Sobre mi | Andres Prias</title>
+  <meta name="description" content="Perfil profesional de Andrés Prias, desarrollador de software enfocado en experiencias digitales modernas, soluciones prácticas y productos digitales.">
+  <title>Sobre mí | Andrés Prias</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/Fav_icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260617-2">
 </head>
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
 
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Ir al inicio">
+    <a class="brand" href="sobre-mi.html" aria-label="Ir a Sobre mí">
       <span class="brand-mark">
         <img src="assets/brand-logo.png" alt="" aria-hidden="true">
       </span>
-      <span>Andres Prias</span>
+      <span>Andrés Prias</span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav">
-      <span>Menu</span>
+    <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+      <span>Menú</span>
       <span class="menu-icon" aria-hidden="true"></span>
     </button>
 
-    <a class="header-action" href="mailto:anpriasca@gmail.com" aria-label="Enviar correo a Andres Prias">
+    <a class="header-action" href="mailto:anpriasca@gmail.com" aria-label="Enviar correo a Andrés Prias">
       <span>Hablemos</span>
       <span aria-hidden="true">-></span>
     </a>
   </header>
-
-    <nav class="nav" id="mainNav" aria-label="Navegacion principal">
-    <a href="index.html">Inicio</a>
-    <a href="sobre-mi.html">Sobre mi</a>
+  <nav class="nav" id="mainNav" aria-label="Navegación principal">
+    <a href="sobre-mi.html">Sobre mí</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="mini-juego.html">Mini Juego</a>
     <a href="servicios.html">Servicios</a>
-    <a href="metodo.html">Metodo</a>
     <a href="contacto.html">Contacto</a>
   </nav>
-  <main id="swup" class="transition-main">
-<!-- Sobre mi: tabs interactivos y resumen profesional activo. -->
+    <main id="swup" class="transition-main">
+    <!-- Inicio / Hero: nombre, descripción principal, foto y métricas. -->
+<section class="hero" id="inicio">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow">Desarrollo de software, web y producto digital</p>
+        <h1>Hola. Soy Andrés Prias</h1>
+        <p class="hero-lead">
+          Desarrollador de software enfocado en construir experiencias digitales modernas, soluciones prácticas y productos orientados a resolver problemas reales.
+        </p>
+        <div class="personal-mark" aria-label="Marca personal de desarrollo">
+          <img src="assets/brand-logo.png" alt="" aria-hidden="true">
+          <span>Software, web y producto digital</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="proyectos.html">
+            <span>Ver proyectos</span>
+            <span aria-hidden="true">-></span>
+          </a>
+          <a class="btn ghost" href="contacto.html">Contactar</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <figure class="profile-frame">
+          <img src="assets/andres-prias-profile.png" alt="Retrato profesional de Andrés Prias en un entorno de desarrollo">
+        </figure>
+        <div class="product-window">
+          <div class="window-top">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="metric-grid">
+            <article>
+              <span class="metric-label">Stack</span>
+              <strong>Web + Software</strong>
+            </article>
+            <article>
+              <span class="metric-label">Foco</span>
+              <strong>Proyectos reales</strong>
+            </article>
+            <article>
+              <span class="metric-label">Entrega</span>
+              <strong>Escalable</strong>
+            </article>
+            <article>
+              <span class="metric-label">Marca</span>
+              <strong>Personal</strong>
+            </article>
+          </div>
+          <div class="signal-panel">
+            <div class="signal-line"></div>
+            <div class="signal-line short"></div>
+            <div class="signal-line accent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre mí: tabs interactivos y resumen profesional activo. -->
 <section class="intro-band about-section" aria-label="Resumen profesional" data-reveal>
       <div class="about-copy">
-        <p class="eyebrow">Sobre mi</p>
-        <h2>DiseÃ±o y desarrollo soluciones que se sienten claras desde el primer clic.</h2>
+        <p class="eyebrow">Sobre mí</p>
+        <h2>Diseño y desarrollo soluciones que se sienten claras desde el primer clic.</h2>
         <p>
-          Hola, soy AndrÃ©s Prias. Un desarrollador de software enfocado en construir experiencias digitales modernas y soluciones prÃ¡cticas.
+          Hola, soy Andrés Prias. Un desarrollador de software enfocado en construir experiencias digitales modernas y soluciones prácticas.
         </p>
-        <div class="stack-list" aria-label="Areas de especialidad">
+        <div class="stack-list" aria-label="Áreas de especialidad">
           <span>Software a medida</span>
           <span>Desarrollo web</span>
           <span>Ecommerce</span>
@@ -61,7 +116,7 @@
       </div>
 
       <div class="about-card">
-        <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andres Prias">
+        <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andrés Prias">
           <button class="about-tab is-active" type="button" role="tab" aria-selected="true" data-about-tab="perfil">Perfil</button>
           <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="stack">Stack</button>
           <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="enfoque">Enfoque</button>
@@ -70,19 +125,19 @@
         <div class="about-panel is-active" data-about-panel="perfil">
           <span>01</span>
           <h3>Perfil profesional</h3>
-          <p>Mi interÃ©s por la tecnologÃ­a me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseÃ±o, funcionalidad y una visiÃ³n orientada a resolver problemas reales.</p>
+          <p>Mi interés por la tecnología me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseño, funcionalidad y una visión orientada a resolver problemas reales.</p>
         </div>
 
         <div class="about-panel" data-about-panel="stack">
           <span>02</span>
           <h3>Stack en crecimiento</h3>
-          <p>Actualmente continÃºo fortaleciendo mis habilidades en desarrollo web, ingenierÃ­a de software y creaciÃ³n de productos digitales con bases sÃ³lidas y mantenibles.</p>
+          <p>Actualmente continúo fortaleciendo mis habilidades en desarrollo web, ingeniería de software y creación de productos digitales con bases sólidas y mantenibles.</p>
         </div>
 
         <div class="about-panel" data-about-panel="enfoque">
           <span>03</span>
           <h3>Forma de trabajo</h3>
-          <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prÃ¡cticas que conecten diseÃ±o, datos y operaciÃ³n.</p>
+          <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prácticas que conecten diseño, datos y operación.</p>
         </div>
 
         <div class="about-stats" aria-label="Resumen interactivo">
@@ -92,11 +147,11 @@
           </article>
           <article>
             <strong>Software</strong>
-            <span>Sistemas Ãºtiles</span>
+            <span>Sistemas útiles</span>
           </article>
           <article>
             <strong>Producto</strong>
-            <span>VisiÃ³n real</span>
+            <span>Visión real</span>
           </article>
         </div>
       </div>
@@ -105,7 +160,7 @@
 
   <footer class="site-footer">
     <div class="footer-copy">
-      <span>AndrÃ©s Prias</span>
+      <span>Andrés Prias</span>
       <span>Portfolio de desarrollo de software y web</span>
     </div>
     <div class="theme-rail" aria-hidden="false">
@@ -133,7 +188,10 @@
         <span></span>
       </div>
       <button class="theme-toggle" type="button" aria-label="Cambiar a tema claro" aria-pressed="false">
-        <span class="theme-symbol" aria-hidden="true"></span>
+        <span class="theme-symbol" aria-hidden="true">
+          <img class="theme-icon theme-icon-light" src="assets/iconThemeClaro.png" alt="">
+          <img class="theme-icon theme-icon-dark" src="assets/iconThemeOscuro.png" alt="">
+        </span>
       </button>
     </div>
   </footer>
@@ -143,6 +201,20 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

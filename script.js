@@ -1,4 +1,4 @@
-/* Ambient canvas background. */
+﻿/* Ambient canvas background. */
 const canvas = document.querySelector("#ambientCanvas");
 const context = canvas.getContext("2d");
 const pointer = { x: 0.5, y: 0.5 };
@@ -188,7 +188,7 @@ let lastTouchY = 0;
 function setMenuOpen(isOpen) {
   siteHeader.classList.toggle("is-open", isOpen);
   menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
+  menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
 }
 
 function setMobileNavVisible(isVisible) {
@@ -360,7 +360,7 @@ function finishGame(elements) {
   window.clearInterval(spawnId);
   clearBugs(gameArena);
 
-  const name = playerName.value.trim() || "Andres";
+  const name = playerName.value.trim() || "Andrés";
   const ranking = readRanking();
   ranking.push({ name, score, date: new Date().toISOString() });
   ranking.sort((a, b) => b.score - a.score);
@@ -418,7 +418,7 @@ function initGame() {
   elements.clearRanking.addEventListener("click", () => {
     localStorage.removeItem(rankingKey);
     renderRanking(elements.gameBest, elements.rankingList);
-    setMessage(elements.arenaMessage, "Ranking limpio", "Inicia una nueva partida para registrar tu puntuacion.");
+    setMessage(elements.arenaMessage, "Ranking limpio", "Inicia una nueva partida para registrar tu puntuación.");
   });
 
   renderRanking(elements.gameBest, elements.rankingList);
@@ -456,3 +456,10 @@ if (window.Swup) {
 
   swup.hooks.on("page:view", initPage);
 }
+
+
+
+
+
+
+

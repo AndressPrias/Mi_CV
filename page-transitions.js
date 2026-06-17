@@ -1,4 +1,4 @@
-class LocalSwup {
+﻿class LocalSwup {
   constructor(options = {}) {
     this.containers = options.containers || ["#swup"];
     this.animationSelector = options.animationSelector || ".transition-main";
@@ -68,3 +68,10 @@ class LocalSwup {
 if (!window.Swup) {
   window.Swup = LocalSwup;
 }
+
+
+
+
+
+
+
