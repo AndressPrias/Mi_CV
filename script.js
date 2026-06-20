@@ -598,6 +598,39 @@ function initGame() {
   renderRanking(elements.gameBest, elements.rankingList);
 }
 
+function initProjectShowcase() {
+  document.querySelectorAll("[data-project-showcase]").forEach((showcase) => {
+    const mainImage = showcase.querySelector(".project-showcase-main");
+    const label = showcase.querySelector("[data-showcase-label]");
+    const count = showcase.querySelector("[data-showcase-count]");
+    const buttons = showcase.querySelectorAll("[data-showcase-src]");
+
+    if (!mainImage || !buttons.length) return;
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (button.classList.contains("is-active")) return;
+
+        buttons.forEach((item) => {
+          const isActive = item === button;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-selected", String(isActive));
+        });
+
+        showcase.dataset.showcaseTheme = button.dataset.showcaseTheme;
+        mainImage.classList.add("is-switching");
+        window.setTimeout(() => {
+          mainImage.src = button.dataset.showcaseSrc;
+          mainImage.alt = button.dataset.showcaseAlt;
+          if (label) label.textContent = button.dataset.showcaseLabel;
+          if (count) count.textContent = button.dataset.showcaseCount;
+          window.setTimeout(() => mainImage.classList.remove("is-switching"), 80);
+        }, 120);
+      });
+    });
+  });
+}
+
 function updateCurrentNav() {
   const currentPage = location.pathname.split("/").pop() || "index.html";
 
@@ -617,6 +650,7 @@ function initPage() {
   initReveal();
   initAboutTabs();
   initGame();
+  initProjectShowcase();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 

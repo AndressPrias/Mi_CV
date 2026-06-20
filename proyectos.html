@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/Fav_icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=20260617-space2">
+  <link rel="stylesheet" href="styles.css?v=20260618-projects4">
 </head>
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
@@ -42,24 +42,80 @@
   <main id="swup" class="transition-main">
 <!-- Proyectos: duplicar un project-card para agregar nuevos casos. -->
     <section class="section" id="proyectos">
-      <div class="section-heading" data-reveal>
-        <p class="eyebrow">EXPERIENCIA PROFESIONAL</p>
-        <h2>Proyectos desarrollados con impacto real.</h2>
+      <div class="section-heading project-heading" data-reveal>
+        <div>
+          <p class="eyebrow">EXPERIENCIA PROFESIONAL</p>
+          <h2>Proyectos desarrollados con impacto real.</h2>
+        </div>
+        <div class="project-heading-aside" aria-label="Cinco proyectos seleccionados">
+          <strong>05</strong>
+          <span>Casos seleccionados<br>Software · Web · Producto</span>
+        </div>
       </div>
 
       <div class="project-grid">
-        <article class="project-card featured" data-reveal>
-          <div class="project-kicker">🎓 Proyecto Universitario</div>
-          <h3>Sistema de Gestión y Trazabilidad de Muestras</h3>
-          <p>Plataforma para controlar registros, estados y seguimiento de procesos con una base clara para auditoría y toma de decisiones.</p>
-          <div class="project-tags">
-            <span>Java</span>
-            <span>Base de datos</span>
-            <span>Procesos</span>
+        <article class="project-card featured project-nyce" data-project="01" data-reveal>
+          <div class="project-feature-head">
+            <div>
+              <div class="project-kicker">🎓 Proyecto Universitario</div>
+              <h3>Sistema de Control de Muestras — NYCE Colombia</h3>
+            </div>
+            <div class="project-company" aria-label="Proyecto desarrollado para NYCE Colombia">
+              <img src="assets/nyce-colombia-logo.jpg" alt="Logo de NYCE Colombia">
+              <span>Laboratorio de ensayos eléctricos</span>
+            </div>
+          </div>
+          <div class="project-case-layout">
+            <div class="project-case-copy">
+              <p>Desarrollé una aplicación de escritorio en JavaFX para NYCE Colombia, laboratorio de ensayos eléctricos, orientada a gestionar y controlar muestras eléctricas con trazabilidad y eficiencia operativa.</p>
+              <ul class="project-highlights">
+                <li>Registro, almacenamiento, búsqueda y actualización de muestras con evidencia fotográfica.</li>
+                <li>Estados de proceso y códigos internos únicos para asegurar el seguimiento de cada muestra.</li>
+                <li>Importación de datos desde Excel y administración de usuarios con roles diferenciados.</li>
+              </ul>
+            </div>
+
+            <div class="project-showcase" data-project-showcase data-showcase-theme="search">
+              <figure class="project-showcase-stage">
+                <img class="project-showcase-main" src="assets/nyce-search-samples.png" alt="Pantalla de búsqueda y gestión de muestras del sistema NYCE">
+                <figcaption>
+                  <span data-showcase-label>Búsqueda y gestión</span>
+                  <strong data-showcase-count>04 / 04</strong>
+                </figcaption>
+              </figure>
+              <div class="project-showcase-thumbs" role="tablist" aria-label="Capturas del sistema de control de muestras">
+                <button type="button" role="tab" aria-selected="false" title="Inicio de sesión" data-showcase-theme="login" data-showcase-src="assets/nyce-login.png" data-showcase-alt="Pantalla de inicio de sesión del sistema NYCE" data-showcase-label="Inicio de sesión" data-showcase-count="01 / 04">
+                  <img src="assets/nyce-login.png" alt="">
+                </button>
+                <button type="button" role="tab" aria-selected="false" title="Panel principal" data-showcase-theme="dashboard" data-showcase-src="assets/nyce-dashboard.png" data-showcase-alt="Panel principal para administración del sistema NYCE" data-showcase-label="Panel principal" data-showcase-count="02 / 04">
+                  <img src="assets/nyce-dashboard.png" alt="">
+                </button>
+                <button type="button" role="tab" aria-selected="false" title="Registro de muestras" data-showcase-theme="register" data-showcase-src="assets/nyce-register-sample.png" data-showcase-alt="Formulario para registrar una muestra en el sistema NYCE" data-showcase-label="Registro de muestras" data-showcase-count="03 / 04">
+                  <img src="assets/nyce-register-sample.png" alt="">
+                </button>
+                <button class="is-active" type="button" role="tab" aria-selected="true" title="Búsqueda y gestión" data-showcase-theme="search" data-showcase-src="assets/nyce-search-samples.png" data-showcase-alt="Pantalla de búsqueda y gestión de muestras del sistema NYCE" data-showcase-label="Búsqueda y gestión" data-showcase-count="04 / 04">
+                  <img src="assets/nyce-search-samples.png" alt="">
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="project-tech-label">Tecnologías y herramientas</p>
+          <div class="project-tags tech-tags">
+            <span><i class="tech-mark java" aria-hidden="true">J</i>Java 26</span>
+            <span><i class="tech-mark javafx" aria-hidden="true">FX</i>JavaFX</span>
+            <span><i class="tech-mark h2" aria-hidden="true">H2</i>H2 Database</span>
+            <span><i class="tech-mark poi" aria-hidden="true">POI</i>Apache POI</span>
+            <span><i class="tech-mark fxml" aria-hidden="true">&lt;/&gt;</i>FXML</span>
+            <span><i class="tech-mark css" aria-hidden="true">CSS</i>CSS</span>
+            <span><i class="tech-mark idea" aria-hidden="true">IJ</i>IntelliJ IDEA</span>
+            <span><i class="tech-mark github" aria-hidden="true">GH</i>Git / GitHub</span>
           </div>
         </article>
 
-        <article class="project-card" data-reveal>
+        <article class="project-card project-narrow project-megabyte" data-project="02" data-reveal>
+          <div class="project-art project-art--megabyte">
+            <img class="megabyte-logo" src="assets/megabyte-logo.png" alt="Logo de MegaByte">
+          </div>
           <div class="project-kicker">Producto comercial</div>
           <h3>Megabyte MB</h3>
           <p>Experiencia digital pensada para presentar una marca tecnológica con claridad, confianza y capacidad de crecimiento.</p>
@@ -70,7 +126,11 @@
           </div>
         </article>
 
-        <article class="project-card" data-reveal>
+        <article class="project-card project-wide project-commerce" data-project="03" data-reveal>
+          <div class="project-art project-art--commerce" aria-hidden="true">
+            <div class="commerce-metric"><span>Conversión</span><strong>+38%</strong></div>
+            <div class="commerce-bars"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
           <div class="project-kicker">Conversión y ventas</div>
           <h3>Ecommerce y Optimización Comercial</h3>
           <p>Arquitectura visual y funcional para vender mejor: catálogo, rutas de compra y optimización de la experiencia comercial.</p>
@@ -81,7 +141,11 @@
           </div>
         </article>
 
-        <article class="project-card" data-reveal>
+        <article class="project-card project-wide project-personal" data-project="04" data-reveal>
+          <div class="project-art project-art--personal" aria-hidden="true">
+            <img src="assets/brand-logo.png" alt="">
+            <div><strong>ANDRÉS PRIAS</strong><span>Software · Web · Producto</span></div>
+          </div>
           <div class="project-kicker">Identidad profesional</div>
           <h3>Marca Personal de Desarrollo Web</h3>
           <p>Sistema de presencia digital para comunicar habilidades, proyectos y valor profesional con una narrativa memorable.</p>
@@ -92,7 +156,14 @@
           </div>
         </article>
 
-        <article class="project-card" data-reveal>
+        <article class="project-card project-narrow project-space" data-project="05" data-reveal>
+          <div class="project-art project-art--space" aria-hidden="true">
+            <i class="space-star star-one"></i>
+            <i class="space-star star-two"></i>
+            <i class="space-enemy enemy-one"></i>
+            <i class="space-enemy enemy-two"></i>
+            <span class="space-project-ship"></span>
+          </div>
           <div class="project-kicker">Experiencia interactiva</div>
           <h3>Mini Juego</h3>
           <p>Una página independiente del portfolio con ranking local, estado de juego y una interacción ligera para mostrar criterio de producto.</p>
@@ -150,9 +221,14 @@
 
   <script async src="https://unpkg.com/swup@4"></script>
   <script src="page-transitions.js"></script>
-  <script src="script.js?v=20260617-space2"></script>
+  <script src="script.js?v=20260618-projects4"></script>
 </body>
 </html>
+
+
+
+
+
 
 
 
