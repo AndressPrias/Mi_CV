@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/Fav_icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=20260618-projects4">
+  <link rel="stylesheet" href="styles.css?v=20260618-rocket-clean">
 </head>
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
@@ -28,15 +28,17 @@
     </button>
 
     <a class="header-action" href="mailto:anpriasca@gmail.com" aria-label="Enviar correo a Andrés Prias">
+      <span class="action-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
+      </span>
       <span>Hablemos</span>
-      <span aria-hidden="true">-></span>
     </a>
   </header>
   <nav class="nav" id="mainNav" aria-label="Navegación principal">
     <a href="sobre-mi.html">Sobre mí</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="mini-juego.html">Mini Juego</a>
-    <a href="servicios.html">Servicios</a>
+    <a href="servicios.html">Soluciones</a>
     <a href="contacto.html">Contacto</a>
   </nav>
     <main id="swup" class="transition-main">
@@ -54,10 +56,17 @@
         </div>
         <div class="hero-actions">
           <a class="btn primary" href="proyectos.html">
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"></path><path d="M3 7V5a2 2 0 0 1 2-2h4l2 2h4"></path></svg>
+            </span>
             <span>Ver proyectos</span>
-            <span aria-hidden="true">-></span>
           </a>
-          <a class="btn ghost" href="contacto.html">Contactar</a>
+          <a class="btn ghost" href="contacto.html">
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="m4 7 8 6 8-6"></path></svg>
+            </span>
+            <span>Contactar</span>
+          </a>
         </div>
       </div>
 
@@ -99,9 +108,12 @@
     </section>
 
     <!-- Sobre mí: tabs interactivos y resumen profesional activo. -->
-<section class="intro-band about-section" aria-label="Resumen profesional" data-reveal>
+    <section class="intro-band about-section" aria-label="Resumen profesional" data-reveal>
       <div class="about-copy">
-        <p class="eyebrow">Sobre mí</p>
+        <div class="about-kicker">
+          <img src="assets/brand-logo.png" alt="" aria-hidden="true">
+          <p class="eyebrow">Sobre mí</p>
+        </div>
         <h2>Diseño y desarrollo soluciones que se sienten claras desde el primer clic.</h2>
         <p>
           Hola, soy Andrés Prias. Un desarrollador de software enfocado en construir experiencias digitales modernas y soluciones prácticas.
@@ -113,34 +125,75 @@
           <span>Trazabilidad</span>
           <span>Marca personal</span>
         </div>
+
+        <div class="about-tech-strip" aria-label="Tecnologías y herramientas">
+          <span>JavaFX</span>
+          <span>Java</span>
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>Git</span>
+        </div>
       </div>
 
-      <div class="about-card">
-        <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andrés Prias">
-          <button class="about-tab is-active" type="button" role="tab" aria-selected="true" data-about-tab="perfil">Perfil</button>
-          <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="stack">Stack</button>
-          <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="enfoque">Enfoque</button>
+      <div class="about-experience" data-about-scene>
+        <div class="about-orbit-card" aria-label="Resumen visual de Andrés Prias">
+          <div class="about-orbit-logo">
+            <img src="assets/brand-logo.png" alt="Logo Andrés Prias">
+          </div>
+          <div class="about-orbit-ring" aria-hidden="true"></div>
+          <span class="about-orbit-chip chip-web">Web</span>
+          <span class="about-orbit-chip chip-code">Software</span>
+          <span class="about-orbit-chip chip-product">Producto</span>
+          <div class="about-orbit-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
 
-        <div class="about-panel is-active" data-about-panel="perfil">
-          <span>01</span>
-          <h3>Perfil profesional</h3>
-          <p>Mi interés por la tecnología me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseño, funcionalidad y una visión orientada a resolver problemas reales.</p>
+        <div class="about-card">
+          <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andrés Prias">
+            <button class="about-tab is-active" type="button" role="tab" aria-selected="true" data-about-tab="perfil">
+              <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <span>Perfil</span>
+            </button>
+            <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="stack">
+              <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path><path d="m3 18 9 5 9-5"></path></svg>
+              </span>
+              <span>Stack</span>
+            </button>
+            <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="enfoque">
+              <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="m16 8-2.2 5.8L8 16l2.2-5.8z"></path></svg>
+              </span>
+              <span>Enfoque</span>
+            </button>
+          </div>
+
+          <div class="about-panel is-active" data-about-panel="perfil">
+            <span>01</span>
+            <h3>Perfil profesional</h3>
+            <p>Mi interés por la tecnología me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseño, funcionalidad y una visión orientada a resolver problemas reales.</p>
+          </div>
+
+          <div class="about-panel" data-about-panel="stack">
+            <span>02</span>
+            <h3>Stack en crecimiento</h3>
+            <p>Actualmente continúo fortaleciendo mis habilidades en desarrollo web, ingeniería de software y creación de productos digitales con bases sólidas y mantenibles.</p>
+          </div>
+
+          <div class="about-panel" data-about-panel="enfoque">
+            <span>03</span>
+            <h3>Forma de trabajo</h3>
+            <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prácticas que conecten diseño, datos y operación.</p>
+          </div>
         </div>
 
-        <div class="about-panel" data-about-panel="stack">
-          <span>02</span>
-          <h3>Stack en crecimiento</h3>
-          <p>Actualmente continúo fortaleciendo mis habilidades en desarrollo web, ingeniería de software y creación de productos digitales con bases sólidas y mantenibles.</p>
-        </div>
-
-        <div class="about-panel" data-about-panel="enfoque">
-          <span>03</span>
-          <h3>Forma de trabajo</h3>
-          <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prácticas que conecten diseño, datos y operación.</p>
-        </div>
-
-        <div class="about-stats" aria-label="Resumen interactivo">
+        <div class="about-stats" aria-label="Resumen visual de habilidades">
           <article>
             <strong>Web</strong>
             <span>Interfaces modernas</span>
@@ -152,6 +205,21 @@
           <article>
             <strong>Producto</strong>
             <span>Visión real</span>
+          </article>
+        </div>
+
+        <div class="about-process" aria-label="Forma de trabajo">
+          <article>
+            <span>01</span>
+            <strong>Entender</strong>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Diseñar</strong>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Construir</strong>
           </article>
         </div>
       </div>
@@ -198,7 +266,7 @@
 
   <script async src="https://unpkg.com/swup@4"></script>
   <script src="page-transitions.js"></script>
-  <script src="script.js?v=20260618-projects4"></script>
+  <script src="script.js?v=20260618-rocket-clean"></script>
 </body>
 </html>
 

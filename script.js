@@ -71,6 +71,18 @@ const themeToggle = document.querySelector(".theme-toggle");
 const themeRail = document.querySelector(".theme-rail");
 const themeTicks = document.querySelectorAll(".theme-track span");
 const savedTheme = localStorage.getItem("andres-prias-theme") || "dark";
+const themePositions = {
+  dark: 18,
+  light: 82
+};
+let themeDragState = {
+  active: false,
+  pointerId: null,
+  startX: 0,
+  moved: false,
+  startedOnToggle: false,
+  ignoreNextClick: false
+};
 let revealObserver = null;
 let activeGame = false;
 let score = 0;
@@ -91,31 +103,65 @@ window.addEventListener("keyup", (event) => {
   gameKeys.delete(event.key.toLowerCase());
 });
 
-/* Theme switch rail: tick heights react to pointer proximity. */
+function getThemePosition() {
+  const railPosition = themeRail?.style.getPropertyValue("--theme-position") || "";
+  const parsedPosition = Number.parseFloat(railPosition);
+  if (Number.isFinite(parsedPosition)) return parsedPosition;
+
+  return document.body.dataset.theme === "light" ? themePositions.light : themePositions.dark;
+}
+
+function setThemeKnobPosition(position) {
+  if (!themeRail) return;
+
+  const safePosition = Math.min(88, Math.max(12, position));
+  themeRail.style.setProperty("--theme-position", `${safePosition.toFixed(2)}%`);
+}
+
+function getThemePositionFromPointer(pointerX) {
+  if (!themeRail) return getThemePosition();
+
+  const railBox = themeRail.getBoundingClientRect();
+  const rawPosition = ((pointerX - railBox.left) / railBox.width) * 100;
+  return Math.min(88, Math.max(12, rawPosition));
+}
+
+function pointerXFromThemePosition(position) {
+  if (!themeRail) return null;
+
+  const railBox = themeRail.getBoundingClientRect();
+  return railBox.left + railBox.width * (position / 100);
+}
+
+/* Theme switch rail: tick heights react to knob or pointer proximity. */
 function setThemeTickHeights(pointerX = null) {
   if (!themeRail || !themeTicks.length) return;
 
   const railBox = themeRail.getBoundingClientRect();
-  const visibleTicks = Array.from(themeTicks).slice(0, 9);
+  const visibleTicks = Array.from(themeTicks);
+  const activePointerX = pointerX ?? pointerXFromThemePosition(getThemePosition());
 
   visibleTicks.forEach((tick, index) => {
     const tickCenter = tick.getBoundingClientRect().left + tick.getBoundingClientRect().width / 2;
-    const centerWeight = 1 - Math.min(Math.abs(index - (visibleTicks.length - 1) / 2) / 4, 1);
-    const baseHeight = 16 + centerWeight * 30;
+    const wave = Math.sin((index / Math.max(visibleTicks.length - 1, 1)) * Math.PI);
+    const stagger = index % 2 === 0 ? 0 : 7;
+    const baseHeight = 10 + wave * 22 + stagger;
     let height = baseHeight;
 
-    if (pointerX !== null) {
-      const distance = Math.abs(pointerX - tickCenter);
-      const influence = Math.max(0, 1 - distance / (railBox.width * 0.22));
-      height += influence * 24;
+    if (activePointerX !== null) {
+      const distance = Math.abs(activePointerX - tickCenter);
+      const influence = Math.max(0, 1 - distance / (railBox.width * 0.16));
+      height += influence * 38;
+      tick.style.setProperty("--tick-scale", (1 + influence * 0.12).toFixed(2));
     }
 
     tick.style.setProperty("--tick-height", height.toFixed(1));
-    tick.style.opacity = pointerX === null ? "" : String(0.48 + Math.min(height / 58, 1) * 0.52);
+    tick.style.opacity = String(0.36 + Math.min(height / 70, 1) * 0.64);
   });
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, options = {}) {
+  const { syncKnob = true, persist = true } = options;
   const nextTheme = theme === "light" ? "light" : "dark";
   document.body.dataset.theme = nextTheme;
 
@@ -124,24 +170,130 @@ function applyTheme(theme) {
     themeToggle.setAttribute("aria-label", nextTheme === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro");
   }
 
-  localStorage.setItem("andres-prias-theme", nextTheme);
+  if (syncKnob) {
+    setThemeKnobPosition(themePositions[nextTheme]);
+    setThemeTickHeights();
+  }
+
+  if (persist) {
+    localStorage.setItem("andres-prias-theme", nextTheme);
+  }
 }
 
 applyTheme(savedTheme);
 
 if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
+  themeToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (themeDragState.ignoreNextClick) {
+      event.preventDefault();
+      themeDragState.ignoreNextClick = false;
+      return;
+    }
+
     applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
   });
 }
 
 if (themeRail) {
+  const updateThemeDrag = (event) => {
+    const nextPosition = getThemePositionFromPointer(event.clientX);
+    const nextTheme = nextPosition >= 50 ? "light" : "dark";
+    setThemeKnobPosition(nextPosition);
+    applyTheme(nextTheme, { syncKnob: false, persist: false });
+    setThemeTickHeights(event.clientX);
+  };
+
+  const resetThemeDrag = () => {
+    window.removeEventListener("pointermove", handleThemeDragMove);
+    window.removeEventListener("pointerup", finishThemeDrag);
+    window.removeEventListener("pointercancel", cancelThemeDrag);
+    themeDragState.active = false;
+    themeDragState.pointerId = null;
+    themeDragState.startedOnToggle = false;
+  };
+
+  const handleThemeDragMove = (event) => {
+    if (!themeDragState.active || event.pointerId !== themeDragState.pointerId) return;
+
+    if (Math.abs(event.clientX - themeDragState.startX) > 4) {
+      themeDragState.moved = true;
+    }
+
+    updateThemeDrag(event);
+  };
+
+  const finishThemeDrag = (event) => {
+    if (!themeDragState.active || event.pointerId !== themeDragState.pointerId) return;
+
+    themeRail.classList.remove("is-dragging");
+    themeRail.classList.add("is-settling");
+
+    if (themeDragState.moved || !themeDragState.startedOnToggle) {
+      const nextTheme = getThemePosition() >= 50 ? "light" : "dark";
+      applyTheme(nextTheme);
+    } else {
+      applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
+    }
+
+    if (themeDragState.startedOnToggle) {
+      themeDragState.ignoreNextClick = true;
+    }
+
+    window.setTimeout(() => {
+      themeRail.classList.remove("is-settling");
+      themeDragState.ignoreNextClick = false;
+    }, 480);
+
+    resetThemeDrag();
+  };
+
+  const cancelThemeDrag = () => {
+    themeRail.classList.remove("is-dragging");
+    applyTheme(document.body.dataset.theme);
+    resetThemeDrag();
+  };
+
+  themeRail.addEventListener("pointerdown", (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
+
+    event.preventDefault();
+    const startedOnToggle = Boolean(event.target.closest(".theme-toggle"));
+    themeDragState = {
+      active: true,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      moved: false,
+      startedOnToggle,
+      ignoreNextClick: themeDragState.ignoreNextClick
+    };
+    themeRail.classList.add("is-dragging");
+    themeRail.classList.remove("is-settling");
+
+    try {
+      themeRail.setPointerCapture(event.pointerId);
+    } catch {
+      // Window-level listeners below keep the drag stable if capture is unavailable.
+    }
+
+    window.addEventListener("pointermove", handleThemeDragMove);
+    window.addEventListener("pointerup", finishThemeDrag);
+    window.addEventListener("pointercancel", cancelThemeDrag);
+
+    if (!startedOnToggle) {
+      updateThemeDrag(event);
+    }
+  });
+
   themeRail.addEventListener("pointermove", (event) => {
+    if (themeDragState.active) return;
+
     themeRail.classList.add("is-tracking");
     setThemeTickHeights(event.clientX);
   });
 
   themeRail.addEventListener("pointerleave", () => {
+    if (themeDragState.active) return;
     themeRail.classList.remove("is-tracking");
     setThemeTickHeights();
   });
@@ -186,6 +338,25 @@ function initAboutTabs() {
       aboutPanels.forEach((panel) => {
         panel.classList.toggle("is-active", panel.dataset.aboutPanel === selectedPanel);
       });
+    });
+  });
+}
+
+function initAboutScene() {
+  document.querySelectorAll("[data-about-scene]").forEach((scene) => {
+    scene.addEventListener("pointermove", (event) => {
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+
+      const box = scene.getBoundingClientRect();
+      const x = ((event.clientX - box.left) / box.width - 0.5) * 12;
+      const y = ((event.clientY - box.top) / box.height - 0.5) * 12;
+      scene.style.setProperty("--scene-x", `${x.toFixed(2)}px`);
+      scene.style.setProperty("--scene-y", `${y.toFixed(2)}px`);
+    });
+
+    scene.addEventListener("pointerleave", () => {
+      scene.style.setProperty("--scene-x", "0px");
+      scene.style.setProperty("--scene-y", "0px");
     });
   });
 }
@@ -649,6 +820,7 @@ function initPage() {
   updateCurrentNav();
   initReveal();
   initAboutTabs();
+  initAboutScene();
   initGame();
   initProjectShowcase();
   window.scrollTo({ top: 0, behavior: "instant" });
