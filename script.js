@@ -803,10 +803,15 @@ function initProjectShowcase() {
 }
 
 function updateCurrentNav() {
-  const currentPage = location.pathname.split("/").pop() || "index.html";
+  const normalizePage = (page) => {
+    const cleanPage = (page || "").replace(/\.html$/i, "");
+    if (!cleanPage || cleanPage === "index" || cleanPage === "sobre-mi") return "index";
+    return cleanPage;
+  };
+  const currentPage = normalizePage(location.pathname.split("/").pop() || "index");
 
   document.querySelectorAll(".nav a").forEach((link) => {
-    const linkPage = new URL(link.href, location.href).pathname.split("/").pop() || "index.html";
+    const linkPage = normalizePage(new URL(link.href, location.href).pathname.split("/").pop() || "index");
     const isCurrent = linkPage === currentPage;
     if (isCurrent) {
       link.setAttribute("aria-current", "page");
@@ -827,15 +832,6 @@ function initPage() {
 }
 
 initPage();
-
-if (window.Swup) {
-  const swup = new Swup({
-    containers: ["#swup"],
-    animationSelector: '[class*="transition-"]'
-  });
-
-  swup.hooks.on("page:view", initPage);
-}
 
 
 
