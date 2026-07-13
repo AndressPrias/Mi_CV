@@ -1,0 +1,19 @@
+{
+  "name": "Andrés Prias Portfolio",
+  "short_name": "Andrés Prias",
+  "description": "Portfolio profesional de Andrés Prias, desarrollador de software, web y soluciones digitales.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071018",
+  "theme_color": "#071018",
+  "icons": [
+    {
+      "src": "/assets/Fav_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

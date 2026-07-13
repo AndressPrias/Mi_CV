@@ -2,8 +2,14 @@ DirectoryIndex index.html
 
 RewriteEngine On
 
+RewriteRule ^sobre-mi/?$ / [R=301,L]
+RewriteRule ^metodo/?$ /servicios/ [R=301,L]
+
 RewriteCond %{THE_REQUEST} \s/+sobre-mi\.html[\s?] [NC]
 RewriteRule ^sobre-mi\.html$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+metodo\.html[\s?] [NC]
+RewriteRule ^metodo\.html$ /servicios/ [R=301,L]
 
 RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
 RewriteRule ^index\.html$ / [R=301,L]

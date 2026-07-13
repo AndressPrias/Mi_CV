@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andev.com.co/sitemap.xml
