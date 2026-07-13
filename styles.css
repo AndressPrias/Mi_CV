@@ -696,11 +696,7 @@ body[data-theme="light"] .about-orbit-logo {
 }
 
 body[data-theme="light"] .about-solutions::before {
-  background:
-    radial-gradient(circle at 8% 46%, rgba(0, 107, 92, 0.11), transparent 28%),
-    radial-gradient(circle at 92% 52%, rgba(26, 158, 219, 0.13), transparent 30%),
-    linear-gradient(90deg, rgba(244, 238, 229, 0.9), rgba(248, 244, 238, 0.42) 50%, rgba(244, 238, 229, 0.86)),
-    transparent;
+  background: transparent;
 }
 
 body[data-theme="light"] .about-solutions-copy h2,
@@ -1251,21 +1247,20 @@ body[data-theme="light"] .about-solution-icon svg {
 /* About solutions layout: client-facing value proposition. */
 .about-solutions {
   grid-template-columns: minmax(320px, 0.86fr) minmax(420px, 1.14fr);
-  gap: clamp(44px, 7vw, 92px);
+  gap: 52px;
   align-items: center;
-  padding: 96px clamp(28px, 7vw, 96px) 104px;
+  min-height: calc(100vh - 72px);
+  padding: 78px 0 88px;
+  border-top: 0;
   border-radius: 0;
 }
 
 .about-solutions::before {
   inset: 0;
   border: 0;
-  background:
-    radial-gradient(circle at 8% 46%, rgba(0, 222, 185, 0.18), transparent 28%),
-    radial-gradient(circle at 92% 52%, rgba(0, 222, 185, 0.16), transparent 30%),
-    linear-gradient(90deg, rgba(1, 26, 30, 0.7), rgba(0, 12, 16, 0.18) 48%, rgba(1, 26, 30, 0.62)),
-    transparent;
+  background: transparent;
   box-shadow: none;
+  pointer-events: none;
 }
 
 .about-solutions-copy {
@@ -3405,7 +3400,8 @@ body[data-theme="light"] .solutions-cta {
   .about-solutions {
     grid-template-columns: 1fr;
     gap: 44px;
-    padding: 72px clamp(18px, 5vw, 42px);
+    min-height: auto;
+    padding: 72px 0;
   }
 
   .about-section::before {
@@ -3623,7 +3619,7 @@ body[data-theme="light"] .solutions-cta {
   }
 
   .about-solutions {
-    padding: 54px 18px 64px;
+    padding: 54px 0 64px;
   }
 
   .about-line-kicker {
