@@ -832,6 +832,28 @@ function initProjectFilters() {
   });
 }
 
+function initCopyButtons() {
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const value = button.dataset.copy || "";
+
+      try {
+        await navigator.clipboard.writeText(value);
+        button.classList.add("is-copied");
+        window.setTimeout(() => button.classList.remove("is-copied"), 1200);
+      } catch {
+        button.classList.remove("is-copied");
+      }
+    });
+  });
+}
+
+function initIconLibrary() {
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
 function updateCurrentNav() {
   const normalizePage = (pathname) => {
     const segments = pathname.split("/").filter(Boolean);
@@ -864,6 +886,8 @@ function initPage() {
   initGame();
   initProjectShowcase();
   initProjectFilters();
+  initCopyButtons();
+  initIconLibrary();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 

@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/Fav_icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="/styles.css?v=20260712-projects-balanced">
+  <link rel="stylesheet" href="/styles.css?v=20260712-contact-no-box">
 </head>
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
@@ -42,34 +42,80 @@
     <a href="/contacto/">Contacto</a>
   </nav>
   <main>
-<!-- Contacto: correo, WhatsApp y cierre comercial. -->
-    <section class="contact-section" id="contacto" data-reveal>
-      <div class="contact-brand" aria-hidden="true">
-        <img src="/assets/brand-logo.png" alt="">
+    <!-- Contacto: invitación directa, canales y señales de confianza. -->
+    <section class="contact-section contact-redesign" id="contacto" data-reveal>
+      <div class="contact-hero-copy">
+        <p class="eyebrow">Contacto</p>
+        <h2>Hablemos de tus <span>ideas.</span><br>Estoy listo para ayudarte.</h2>
+        <p>Si tienes un proyecto en mente, una colaboración o simplemente quieres saludar, estaré encantado de leerte.</p>
+
+        <div class="contact-actions contact-primary-actions">
+          <a class="btn primary" href="mailto:anpriasca@gmail.com">
+            <span class="btn-icon" aria-hidden="true">
+              <i data-lucide="mail"></i>
+            </span>
+            <span>Enviar correo</span>
+            <i class="contact-arrow" data-lucide="arrow-right" aria-hidden="true"></i>
+          </a>
+          <a class="btn ghost" href="https://wa.me/573197265704" target="_blank" rel="noreferrer">
+            <span class="btn-icon" aria-hidden="true">
+              <i data-lucide="message-circle"></i>
+            </span>
+            <span>WhatsApp</span>
+            <i class="contact-arrow" data-lucide="arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="contact-details contact-copy-list" aria-label="Datos de contacto">
+          <a href="mailto:anpriasca@gmail.com">
+            <span class="contact-detail-icon" aria-hidden="true"><i data-lucide="mail"></i></span>
+            <span>anpriasca@gmail.com</span>
+          </a>
+          <button type="button" class="contact-copy" data-copy="anpriasca@gmail.com" aria-label="Copiar correo">
+            <i data-lucide="copy" aria-hidden="true"></i>
+          </button>
+          <a href="https://wa.me/573197265704" target="_blank" rel="noreferrer">
+            <span class="contact-detail-icon" aria-hidden="true"><i data-lucide="phone"></i></span>
+            <span>+57 319 726 5704</span>
+          </a>
+          <button type="button" class="contact-copy" data-copy="+573197265704" aria-label="Copiar WhatsApp">
+            <i data-lucide="copy" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
-      <p class="eyebrow">Contacto</p>
-      <h2>Construyamos una presencia digital que se sienta premium y trabaje en serio.</h2>
-      <div class="contact-actions">
-        <a class="btn primary" href="mailto:anpriasca@gmail.com">
-          <span class="btn-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="m4 7 8 6 8-6"></path></svg>
-          </span>
-          <span>Enviar correo</span>
-        </a>
-        <a class="btn ghost" href="https://wa.me/573197265704" target="_blank" rel="noreferrer">
-          <span class="btn-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.1A8 8 0 1 1 20 11.5z"></path><path d="M9 8.5c.5 2.4 2.1 4 4.5 4.5"></path><path d="M14 13.5h.01"></path></svg>
-          </span>
-          <span>WhatsApp</span>
-        </a>
+
+      <div class="contact-visual" aria-hidden="true">
+        <div class="contact-orbit"></div>
+        <div class="contact-logo-orb"><img src="/assets/brand-logo.png" alt=""></div>
+        <div class="contact-envelope">
+          <div class="contact-letter"><img src="/assets/brand-logo.png" alt=""></div>
+          <span class="envelope-fold fold-left"></span>
+          <span class="envelope-fold fold-right"></span>
+        </div>
+        <div class="contact-bubble bubble-heart"><i data-lucide="heart"></i></div>
+        <div class="contact-bubble bubble-chat"><span></span><span></span><span></span></div>
       </div>
-      <div class="contact-details" aria-label="Datos de contacto">
-        <a href="mailto:anpriasca@gmail.com">anpriasca@gmail.com</a>
-        <a href="https://wa.me/573197265704" target="_blank" rel="noreferrer">+57 319 726 5704</a>
+
+      <div class="contact-trust-grid" aria-label="Razones para contactar a Andrés Prias">
+        <article>
+          <span class="trust-icon" aria-hidden="true"><i data-lucide="zap"></i></span>
+          <div><h3>Respuesta rápida</h3><p>Te respondo en menos de 24 horas.</p></div>
+        </article>
+        <article>
+          <span class="trust-icon" aria-hidden="true"><i data-lucide="user-round"></i></span>
+          <div><h3>Atención personalizada</h3><p>Cada proyecto es único, como tu idea.</p></div>
+        </article>
+        <article>
+          <span class="trust-icon" aria-hidden="true"><i data-lucide="shield"></i></span>
+          <div><h3>Compromiso total</h3><p>Trabajo en serio para entregar soluciones de calidad.</p></div>
+        </article>
+        <article>
+          <span class="trust-icon" aria-hidden="true"><i data-lucide="star"></i></span>
+          <div><h3>Resultados que hablan</h3><p>Código limpio, diseño cuidado y objetivos cumplidos.</p></div>
+        </article>
       </div>
     </section>
-  
-</main>
+  </main>
 
   <!-- Footer: firma del sitio y control de tema claro/oscuro. -->
   <footer class="site-footer">
@@ -110,9 +156,19 @@
     </div>
   </footer>
 
-  <script src="/script.js?v=20260712-projects-balanced"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/script.js?v=20260712-contact-no-box"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
