@@ -803,15 +803,20 @@ function initProjectShowcase() {
 }
 
 function updateCurrentNav() {
-  const normalizePage = (page) => {
+  const normalizePage = (pathname) => {
+    const segments = pathname.split("/").filter(Boolean);
+    const lastSegment = segments.at(-1) || "";
+    const page = lastSegment.toLowerCase() === "index.html" && segments.length > 1
+      ? segments.at(-2)
+      : lastSegment;
     const cleanPage = (page || "").replace(/\.html$/i, "");
     if (!cleanPage || cleanPage === "index" || cleanPage === "sobre-mi") return "index";
     return cleanPage;
   };
-  const currentPage = normalizePage(location.pathname.split("/").pop() || "index");
+  const currentPage = normalizePage(location.pathname);
 
   document.querySelectorAll(".nav a").forEach((link) => {
-    const linkPage = normalizePage(new URL(link.href, location.href).pathname.split("/").pop() || "index");
+    const linkPage = normalizePage(new URL(link.href, location.href).pathname);
     const isCurrent = linkPage === currentPage;
     if (isCurrent) {
       link.setAttribute("aria-current", "page");
