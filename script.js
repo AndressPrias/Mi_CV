@@ -848,12 +848,6 @@ function initCopyButtons() {
   });
 }
 
-function initIconLibrary() {
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
-}
-
 function updateCurrentNav() {
   const normalizePage = (pathname) => {
     const segments = pathname.split("/").filter(Boolean);
@@ -887,7 +881,6 @@ function initPage() {
   initProjectShowcase();
   initProjectFilters();
   initCopyButtons();
-  initIconLibrary();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 

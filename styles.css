@@ -77,6 +77,13 @@ a {
   text-decoration: none;
 }
 
+.fi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
 #ambientCanvas {
   position: fixed;
   inset: 0;
@@ -543,15 +550,29 @@ body[data-theme="light"] .personal-mark img {
 
 .btn-icon svg,
 .tab-icon svg,
-.action-icon svg {
+.action-icon svg,
+.btn-icon .fi,
+.tab-icon .fi,
+.action-icon .fi {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.btn-icon svg,
+.tab-icon svg,
+.action-icon svg {
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.btn-icon .fi,
+.tab-icon .fi,
+.action-icon .fi {
+  font-size: 1.05rem;
 }
 
 .btn.primary {
@@ -758,6 +779,11 @@ body[data-theme="light"] .about-solution-icon {
 body[data-theme="light"] .about-service-chips svg,
 body[data-theme="light"] .about-solution-icon svg {
   stroke: #008f78;
+}
+
+body[data-theme="light"] .about-service-chips .fi,
+body[data-theme="light"] .about-solution-icon .fi {
+  color: #008f78;
 }
 
 .window-top {
@@ -1387,6 +1413,13 @@ body[data-theme="light"] .about-solution-icon svg {
   stroke-linejoin: round;
 }
 
+.about-service-chips .fi {
+  width: 20px;
+  height: 20px;
+  color: #16eec4;
+  font-size: 1.1rem;
+}
+
 .about-cta {
   width: fit-content;
   min-width: 284px;
@@ -1420,6 +1453,7 @@ body[data-theme="light"] .about-solution-icon svg {
   stroke-width: 2.3;
   stroke-linecap: round;
   stroke-linejoin: round;
+  font-size: 1.12rem;
 }
 
 .about-solution-grid {
@@ -1482,6 +1516,13 @@ body[data-theme="light"] .about-solution-icon svg {
   stroke-width: 1.9;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.about-solution-icon .fi {
+  width: 36px;
+  height: 36px;
+  color: #16eec4;
+  font-size: 2.05rem;
 }
 
 .about-solution-card > span {
@@ -3551,6 +3592,14 @@ body[data-theme="light"] .service-list-redesign li {
   stroke-linejoin: round;
 }
 
+.solutions-benefits .fi,
+.solutions-cta .fi,
+.solution-icon .fi {
+  width: 100%;
+  height: 100%;
+  font-size: 2.15rem;
+}
+
 .solutions-benefits strong,
 .solutions-benefits small {
   display: block;
@@ -3636,6 +3685,12 @@ body[data-theme="light"] .service-list-redesign li {
 .solution-icon svg {
   width: 50px;
   height: 50px;
+}
+
+.solution-icon .fi {
+  width: 50px;
+  height: 50px;
+  font-size: 2.85rem;
 }
 
 .solution-number {
@@ -3801,6 +3856,7 @@ body[data-theme="light"] .solutions-cta {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  font-size: 1.08rem;
 }
 
 .contact-copy-list {
@@ -3830,9 +3886,7 @@ body[data-theme="light"] .solutions-cta {
 }
 
 .contact-detail-icon svg,
-.contact-copy svg,
-.contact-detail-icon [data-lucide],
-.contact-copy [data-lucide] {
+.contact-copy svg {
   width: 18px;
   height: 18px;
   fill: none;
@@ -3840,6 +3894,13 @@ body[data-theme="light"] .solutions-cta {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.contact-detail-icon .fi,
+.contact-copy .fi {
+  width: 18px;
+  height: 18px;
+  font-size: 1rem;
 }
 
 .contact-copy {
@@ -3997,12 +4058,18 @@ body[data-theme="light"] .solutions-cta {
   height: 78px;
 }
 
-.bubble-heart svg,
-.bubble-heart [data-lucide] {
+.bubble-heart svg {
   width: 36px;
   height: 36px;
   fill: #55f0bf;
   stroke: #55f0bf;
+}
+
+.bubble-heart .fi {
+  width: 36px;
+  height: 36px;
+  color: #55f0bf;
+  font-size: 2rem;
 }
 
 .bubble-chat {
@@ -4053,8 +4120,7 @@ body[data-theme="light"] .solutions-cta {
   background: rgba(24, 240, 197, 0.08);
 }
 
-.trust-icon svg,
-.trust-icon [data-lucide] {
+.trust-icon svg {
   width: 30px;
   height: 30px;
   fill: none;
@@ -4062,6 +4128,13 @@ body[data-theme="light"] .solutions-cta {
   stroke-width: 1.9;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.trust-icon .fi {
+  width: 30px;
+  height: 30px;
+  color: #44e5bc;
+  font-size: 1.75rem;
 }
 
 .contact-trust-grid h3 {
@@ -4088,6 +4161,15 @@ body[data-theme="light"] .solutions-cta {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+}
+
+.icon-credit {
+  color: color-mix(in srgb, var(--muted), transparent 12%);
+}
+
+.icon-credit a {
+  color: var(--green);
+  font-weight: 800;
 }
 
 .site-footer .theme-rail {
@@ -4384,7 +4466,8 @@ body[data-theme="light"] .solutions-cta {
     height: 86px;
   }
 
-  .solution-icon svg {
+  .solution-icon svg,
+  .solution-icon .fi {
     width: 48px;
     height: 48px;
   }
