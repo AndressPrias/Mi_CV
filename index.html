@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/Fav_icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="/styles.css?v=20260712-clean-routes">
+  <link rel="stylesheet" href="/styles.css?v=20260712-about-redesign">
 </head>
 <body>
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
@@ -108,120 +108,89 @@
     </section>
 
     <!-- Sobre mí: tabs interactivos y resumen profesional activo. -->
-    <section class="intro-band about-section" aria-label="Resumen profesional" data-reveal>
-      <div class="about-copy">
-        <div class="about-kicker">
-          <img src="/assets/brand-logo.png" alt="" aria-hidden="true">
-          <p class="eyebrow">Sobre mí</p>
+    <section class="intro-band about-section about-solutions" aria-label="Resumen profesional" data-reveal>
+      <div class="about-copy about-solutions-copy">
+        <div class="about-line-kicker">
+          <span>SOBRE MÍ</span>
+          <i aria-hidden="true"></i>
         </div>
-        <h2>Diseño y desarrollo soluciones que se sienten claras desde el primer clic.</h2>
+        <h2>Creo soluciones digitales que impulsan <span>ideas</span> y <span>negocios.</span></h2>
         <p>
-          Hola, soy Andrés Prias. Un desarrollador de software enfocado en construir experiencias digitales modernas y soluciones prácticas.
+          Desarrollo aplicaciones, sitios web y sistemas a medida que combinan diseño, tecnología y estrategia para resolver problemas reales y generar resultados.
         </p>
-        <div class="stack-list" aria-label="Áreas de especialidad">
-          <span>Software a medida</span>
-          <span>Desarrollo web</span>
-          <span>Ecommerce</span>
-          <span>Trazabilidad</span>
-          <span>Marca personal</span>
+
+        <div class="about-service-chips" aria-label="Especialidades principales">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path><path d="m14 4-4 16"></path></svg>
+            Desarrollo Web
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 16-9 5-9-5V8l9-5 9 5z"></path><path d="m3.3 7.8 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+            Software a medida
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"></path><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+            Sistemas internos
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h12"></path><path d="m11 8 4 4-4 4"></path><path d="M21 4v16"></path></svg>
+            Optimización
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m8 12 2.5 2.5L16 9"></path></svg>
+            UI/UX
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h7l-1 8 8-12h-7z"></path></svg>
+            Tecnología
+          </span>
         </div>
 
-        <div class="about-tech-strip" aria-label="Tecnologías y herramientas">
-          <span>JavaFX</span>
-          <span>Java</span>
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>JavaScript</span>
-          <span>Git</span>
-        </div>
+        <a class="btn about-cta" href="/contacto/">
+          <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
+          </span>
+          <span>Hablemos de tu proyecto</span>
+          <svg class="about-cta-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </a>
       </div>
 
-      <div class="about-experience" data-about-scene>
-        <div class="about-orbit-card" aria-label="Resumen visual de Andrés Prias">
-          <div class="about-orbit-logo">
-            <img src="/assets/brand-logo.png" alt="Logo Andrés Prias">
+      <div class="about-solution-grid" aria-label="Servicios y enfoque de Andrés Prias">
+        <article class="about-solution-card">
+          <div class="about-solution-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"></rect><path d="M4 9h16"></path><path d="m10 13-2 2 2 2"></path><path d="m14 13 2 2-2 2"></path></svg>
           </div>
-          <div class="about-orbit-ring" aria-hidden="true"></div>
-          <span class="about-orbit-chip chip-web">Web</span>
-          <span class="about-orbit-chip chip-code">Software</span>
-          <span class="about-orbit-chip chip-product">Producto</span>
-          <div class="about-orbit-lines" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+          <span>01</span>
+          <h3>Diseño Web Profesional</h3>
+          <p>Páginas modernas, rápidas y optimizadas para convertir visitas en clientes.</p>
+        </article>
+
+        <article class="about-solution-card">
+          <div class="about-solution-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path><path d="m14 4-4 16"></path></svg>
           </div>
-        </div>
+          <span>02</span>
+          <h3>Sistemas a medida</h3>
+          <p>Software personalizado para automatizar procesos, organizar información y ahorrar tiempo.</p>
+        </article>
 
-        <div class="about-card">
-          <div class="about-tabs" role="tablist" aria-label="Detalles sobre Andrés Prias">
-            <button class="about-tab is-active" type="button" role="tab" aria-selected="true" data-about-tab="perfil">
-              <span class="tab-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </span>
-              <span>Perfil</span>
-            </button>
-            <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="stack">
-              <span class="tab-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path><path d="m3 18 9 5 9-5"></path></svg>
-              </span>
-              <span>Stack</span>
-            </button>
-            <button class="about-tab" type="button" role="tab" aria-selected="false" data-about-tab="enfoque">
-              <span class="tab-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="m16 8-2.2 5.8L8 16l2.2-5.8z"></path></svg>
-              </span>
-              <span>Enfoque</span>
-            </button>
+        <article class="about-solution-card">
+          <div class="about-solution-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-5"></path></svg>
           </div>
+          <span>03</span>
+          <h3>Experiencia que genera confianza</h3>
+          <p>Me enfoco en entender tu negocio para entregar soluciones útiles, claras y efectivas.</p>
+        </article>
 
-          <div class="about-panel is-active" data-about-panel="perfil">
-            <span>01</span>
-            <h3>Perfil profesional</h3>
-            <p>Mi interés por la tecnología me ha llevado a desarrollar aplicaciones, sitios web y proyectos que combinan diseño, funcionalidad y una visión orientada a resolver problemas reales.</p>
+        <article class="about-solution-card">
+          <div class="about-solution-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"></path><path d="M18 19c0 1-1 2-2 2h-2"></path><path d="M4 14h4v5H4z"></path><path d="M16 14h4v5h-4z"></path></svg>
           </div>
-
-          <div class="about-panel" data-about-panel="stack">
-            <span>02</span>
-            <h3>Stack en crecimiento</h3>
-            <p>Actualmente continúo fortaleciendo mis habilidades en desarrollo web, ingeniería de software y creación de productos digitales con bases sólidas y mantenibles.</p>
-          </div>
-
-          <div class="about-panel" data-about-panel="enfoque">
-            <span>03</span>
-            <h3>Forma de trabajo</h3>
-            <p>Me enfoco en entender el problema, ordenar la experiencia y construir soluciones prácticas que conecten diseño, datos y operación.</p>
-          </div>
-        </div>
-
-        <div class="about-stats" aria-label="Resumen visual de habilidades">
-          <article>
-            <strong>Web</strong>
-            <span>Interfaces modernas</span>
-          </article>
-          <article>
-            <strong>Software</strong>
-            <span>Sistemas útiles</span>
-          </article>
-          <article>
-            <strong>Producto</strong>
-            <span>Visión real</span>
-          </article>
-        </div>
-
-        <div class="about-process" aria-label="Forma de trabajo">
-          <article>
-            <span>01</span>
-            <strong>Entender</strong>
-          </article>
-          <article>
-            <span>02</span>
-            <strong>Diseñar</strong>
-          </article>
-          <article>
-            <span>03</span>
-            <strong>Construir</strong>
-          </article>
-        </div>
+          <span>04</span>
+          <h3>Acompañamiento continuo</h3>
+          <p>Soporte, mejoras y mantenimiento para que tu proyecto siempre siga creciendo.</p>
+        </article>
       </div>
     </section>
   </main>
@@ -264,9 +233,10 @@
     </div>
   </footer>
 
-  <script src="/script.js?v=20260712-clean-routes"></script>
+  <script src="/script.js?v=20260712-about-redesign"></script>
 </body>
 </html>
+
 
 
 

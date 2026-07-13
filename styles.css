@@ -695,6 +695,50 @@ body[data-theme="light"] .about-orbit-logo {
   background: rgba(248, 244, 238, 0.86);
 }
 
+body[data-theme="light"] .about-solutions::before {
+  background:
+    radial-gradient(circle at 8% 46%, rgba(0, 107, 92, 0.11), transparent 28%),
+    radial-gradient(circle at 92% 52%, rgba(26, 158, 219, 0.13), transparent 30%),
+    linear-gradient(90deg, rgba(244, 238, 229, 0.9), rgba(248, 244, 238, 0.42) 50%, rgba(244, 238, 229, 0.86)),
+    transparent;
+}
+
+body[data-theme="light"] .about-solutions-copy h2,
+body[data-theme="light"] .about-solution-card h3 {
+  color: #062522;
+  text-shadow: none;
+}
+
+body[data-theme="light"] .about-solutions-copy h2 span,
+body[data-theme="light"] .about-line-kicker,
+body[data-theme="light"] .about-solution-card > span {
+  color: #008f78;
+}
+
+body[data-theme="light"] .about-solutions-copy p:not(.eyebrow),
+body[data-theme="light"] .about-solution-card p {
+  color: #34504d;
+}
+
+body[data-theme="light"] .about-service-chips span,
+body[data-theme="light"] .about-solution-card {
+  border-color: rgba(0, 107, 92, 0.2);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0, 145, 123, 0.08), transparent 36%),
+    rgba(255, 255, 255, 0.62);
+  color: #12312f;
+}
+
+body[data-theme="light"] .about-solution-icon {
+  border-color: rgba(0, 143, 120, 0.35);
+  background: rgba(0, 143, 120, 0.08);
+}
+
+body[data-theme="light"] .about-service-chips svg,
+body[data-theme="light"] .about-solution-icon svg {
+  stroke: #008f78;
+}
+
 .window-top {
   display: flex;
   gap: 8px;
@@ -1202,6 +1246,247 @@ body[data-theme="light"] .about-orbit-logo {
 .about-process strong {
   color: var(--text);
   font-size: 0.9rem;
+}
+
+/* About solutions layout: client-facing value proposition. */
+.about-solutions {
+  grid-template-columns: minmax(320px, 0.86fr) minmax(420px, 1.14fr);
+  gap: clamp(44px, 7vw, 92px);
+  align-items: center;
+  padding: 96px clamp(28px, 7vw, 96px) 104px;
+  border-radius: 0;
+}
+
+.about-solutions::before {
+  inset: 0;
+  border: 0;
+  background:
+    radial-gradient(circle at 8% 46%, rgba(0, 222, 185, 0.18), transparent 28%),
+    radial-gradient(circle at 92% 52%, rgba(0, 222, 185, 0.16), transparent 30%),
+    linear-gradient(90deg, rgba(1, 26, 30, 0.7), rgba(0, 12, 16, 0.18) 48%, rgba(1, 26, 30, 0.62)),
+    transparent;
+  box-shadow: none;
+}
+
+.about-solutions-copy {
+  max-width: 640px;
+}
+
+.about-line-kicker {
+  display: grid;
+  grid-template-columns: auto minmax(56px, 170px);
+  gap: 14px;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 28px;
+  color: #18f0c5;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.about-line-kicker i {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(24, 240, 197, 0.9), rgba(24, 240, 197, 0));
+}
+
+.about-line-kicker i::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #18f0c5;
+  box-shadow: 0 0 18px rgba(24, 240, 197, 0.95);
+  transform: translateY(-50%);
+}
+
+.about-solutions-copy h2 {
+  max-width: 620px;
+  margin-bottom: 28px;
+  color: #f7fbff;
+  font-size: clamp(3.1rem, 5.2vw, 5.15rem);
+  line-height: 1.03;
+  letter-spacing: 0;
+  text-shadow: 0 7px 0 rgba(0, 0, 0, 0.22);
+}
+
+.about-solutions-copy h2 span {
+  color: #28f0c4;
+}
+
+.about-solutions-copy p:not(.eyebrow) {
+  max-width: 560px;
+  color: rgba(238, 242, 248, 0.86);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.about-service-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 12px;
+  max-width: 650px;
+  margin-top: 34px;
+}
+
+.about-service-chips span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 17px;
+  border: 1px solid rgba(24, 240, 197, 0.25);
+  border-radius: 999px;
+  background: rgba(1, 22, 26, 0.56);
+  color: #f5fbff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  box-shadow: inset 0 0 18px rgba(24, 240, 197, 0.05);
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.about-service-chips span:hover {
+  transform: translateY(-3px);
+  border-color: rgba(24, 240, 197, 0.56);
+  background: rgba(24, 240, 197, 0.1);
+}
+
+.about-service-chips svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #16eec4;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-cta {
+  width: fit-content;
+  min-width: 284px;
+  margin-top: 42px;
+  padding: 18px 20px 18px 22px;
+  border-color: rgba(31, 245, 198, 0.52);
+  background: linear-gradient(135deg, #4cffd2, #15dcb4);
+  color: #001f23;
+  box-shadow: 0 16px 40px rgba(18, 236, 195, 0.34);
+}
+
+.about-cta:hover {
+  color: #001f23;
+  box-shadow: 0 20px 56px rgba(18, 236, 195, 0.42);
+}
+
+.about-cta .btn-icon {
+  background: transparent;
+}
+
+.about-cta .btn-icon svg,
+.about-cta-arrow {
+  stroke: currentColor;
+}
+
+.about-cta-arrow {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  fill: none;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-solution-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.about-solution-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  padding: 36px;
+  border: 1px solid rgba(24, 240, 197, 0.25);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(24, 240, 197, 0.1), transparent 36%),
+    linear-gradient(145deg, rgba(2, 28, 34, 0.86), rgba(2, 13, 18, 0.76));
+  box-shadow: inset 0 0 38px rgba(24, 240, 197, 0.035);
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.about-solution-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -28% -42% 14%;
+  height: 62%;
+  background: radial-gradient(circle, rgba(24, 240, 197, 0.16), transparent 64%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.about-solution-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(24, 240, 197, 0.52);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34), inset 0 0 44px rgba(24, 240, 197, 0.07);
+}
+
+.about-solution-card:hover::after {
+  opacity: 1;
+}
+
+.about-solution-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(24, 240, 197, 0.48);
+  border-radius: 999px;
+  background: rgba(24, 240, 197, 0.07);
+  box-shadow: 0 0 0 10px rgba(24, 240, 197, 0.035);
+}
+
+.about-solution-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: none;
+  stroke: #16eec4;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-solution-card > span {
+  display: block;
+  margin-bottom: 10px;
+  color: #18f0c5;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.about-solution-card h3 {
+  max-width: 320px;
+  margin-bottom: 18px;
+  color: #f8fbff;
+  font-size: clamp(1.8rem, 2.4vw, 2.45rem);
+  line-height: 1.12;
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+}
+
+.about-solution-card p {
+  max-width: 340px;
+  color: rgba(238, 242, 248, 0.82);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  font-weight: 500;
 }
 
 @keyframes slowSpin {
@@ -3117,12 +3402,22 @@ body[data-theme="light"] .solutions-cta {
     padding: 60px clamp(18px, 4vw, 32px) 70px;
   }
 
+  .about-solutions {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 72px clamp(18px, 5vw, 42px);
+  }
+
   .about-section::before {
     inset: 20px 0 18px;
   }
 
   .about-experience {
     grid-template-columns: 1fr;
+  }
+
+  .about-solution-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .about-orbit-card {
@@ -3327,17 +3622,65 @@ body[data-theme="light"] .solutions-cta {
     padding: 42px 16px 56px;
   }
 
+  .about-solutions {
+    padding: 54px 18px 64px;
+  }
+
+  .about-line-kicker {
+    grid-template-columns: auto minmax(42px, 100px);
+    margin-bottom: 22px;
+    font-size: 0.86rem;
+  }
+
   .about-kicker {
     padding: 7px 10px;
   }
 
-  .about-copy h2 {
+  .about-copy h2,
+  .about-solutions-copy h2 {
     font-size: 2.05rem;
   }
 
   .about-copy p:not(.eyebrow),
-  .about-panel p {
+  .about-panel p,
+  .about-solutions-copy p:not(.eyebrow),
+  .about-solution-card p {
     font-size: 0.96rem;
+  }
+
+  .about-service-chips {
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .about-service-chips span {
+    min-height: 40px;
+    padding: 9px 13px;
+    font-size: 0.84rem;
+  }
+
+  .about-cta {
+    width: 100%;
+    min-width: 0;
+    margin-top: 30px;
+  }
+
+  .about-solution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-solution-card {
+    min-height: auto;
+    padding: 26px;
+  }
+
+  .about-solution-card h3 {
+    font-size: 1.7rem;
+  }
+
+  .about-solution-icon {
+    width: 66px;
+    height: 66px;
   }
 
   .about-tabs,
