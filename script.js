@@ -802,6 +802,36 @@ function initProjectShowcase() {
   });
 }
 
+function initProjectFilters() {
+  const filterBars = document.querySelectorAll("[data-project-filters]");
+
+  filterBars.forEach((bar) => {
+    const buttons = bar.querySelectorAll("[data-project-filter]");
+    const section = bar.closest(".projects-redesign");
+    const items = section?.querySelectorAll("[data-project-item]") || [];
+
+    if (!buttons.length || !items.length) return;
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedFilter = button.dataset.projectFilter;
+
+        buttons.forEach((item) => {
+          const isActive = item === button;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        items.forEach((item) => {
+          const types = (item.dataset.projectType || "").split(/\s+/);
+          const isVisible = selectedFilter === "all" || types.includes(selectedFilter);
+          item.classList.toggle("is-hidden", !isVisible);
+        });
+      });
+    });
+  });
+}
+
 function updateCurrentNav() {
   const normalizePage = (pathname) => {
     const segments = pathname.split("/").filter(Boolean);
@@ -833,6 +863,7 @@ function initPage() {
   initAboutScene();
   initGame();
   initProjectShowcase();
+  initProjectFilters();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
