@@ -862,15 +862,19 @@ function updateCurrentNav() {
   const currentPage = normalizePage(location.pathname);
 
   document.querySelectorAll(".nav a").forEach((link) => {
+    const rawHref = link.getAttribute("href") || "";
     const linkPage = normalizePage(new URL(link.href, location.href).pathname);
-    const isCurrent = linkPage === currentPage;
+    const isSectionLink = currentPage === "index" && rawHref.startsWith("#");
+    const isCurrent = isSectionLink ? location.hash === rawHref : linkPage === currentPage;
     if (isCurrent) {
-      link.setAttribute("aria-current", "page");
+      link.setAttribute("aria-current", isSectionLink ? "location" : "page");
     } else {
       link.removeAttribute("aria-current");
     }
   });
 }
+
+window.addEventListener("hashchange", updateCurrentNav);
 
 function initPage() {
   updateCurrentNav();

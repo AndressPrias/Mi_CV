@@ -33,11 +33,11 @@
   <link rel="stylesheet" href="/styles.css?v=20260713-flaticon-icons">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"url":"https://andev.com.co/","knowsAbout":["Desarrollo web","Software a medida","JavaFX","JavaScript","Productos digitales","Automatización"],"@type":"Person","telephone":"+573197265704","jobTitle":"Desarrollador de software","image":"https://andev.com.co/assets/andres-prias-profile.png","name":"Andrés Prias","@id":"https://andev.com.co/#person","email":"mailto:anpriasca@gmail.com"},{"name":"Andrés Prias Portfolio","@id":"https://andev.com.co/#website","publisher":{"@id":"https://andev.com.co/#person"},"@type":"WebSite","url":"https://andev.com.co/","inLanguage":"es-CO"},{"@id":"https://andev.com.co/#webpage","@type":"ProfilePage","url":"https://andev.com.co/","name":"Andrés Prias | Desarrollador de Software Web y Soluciones Digitales","description":"Portfolio profesional de Andrés Prias, desarrollador de software enfocado en sitios web modernos, sistemas a medida, productos digitales y soluciones prácticas para negocios.","inLanguage":"es-CO","about":{"@id":"https://andev.com.co/#person"},"isPartOf":{"@id":"https://andev.com.co/#website"}}]}</script>
 </head>
-<body>
+<body class="home-page">
   <canvas id="ambientCanvas" aria-hidden="true"></canvas>
 
   <header class="site-header">
-    <a class="brand" href="/" aria-label="Ir a Sobre mí">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
       <span class="brand-mark">
         <img src="/assets/brand-logo.png" alt="" aria-hidden="true">
       </span>
@@ -49,41 +49,39 @@
       <span class="menu-icon" aria-hidden="true"></span>
     </button>
 
-    <a class="header-action" href="mailto:anpriasca@gmail.com" aria-label="Enviar correo a Andrés Prias">
+    <a class="header-action" href="#contacto" aria-label="Ir a contacto">
       <span class="action-icon" aria-hidden="true">
         <i class="fi fi-rr-comment"></i>
       </span>
       <span>Hablemos</span>
     </a>
   </header>
-  <nav class="nav" id="mainNav" aria-label="Navegación principal">
-    <a href="/">Sobre mí</a>
-    <a href="/proyectos/">Proyectos</a>
-    <a href="/mini-juego/">Mini Juego</a>
-    <a href="/servicios/">Soluciones</a>
-    <a href="/contacto/">Contacto</a>
+  <nav class="nav home-nav" id="mainNav" aria-label="Navegación principal">
+    <a href="#servicios">Servicios</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#contacto">Contacto</a>
   </nav>
-    <main>
-    <!-- Inicio / Hero: nombre, descripción principal, foto y métricas. -->
-<section class="hero" id="inicio">
+  <main>
+    <section class="hero home-hero" id="inicio">
       <div class="hero-copy" data-reveal>
-        <p class="eyebrow">Desarrollo de software, web y producto digital</p>
-        <h1>Hola. Soy Andrés Prias</h1>
+        <p class="eyebrow">Desarrollador de software</p>
+        <h1>Soluciones digitales que convierten ideas en productos reales.</h1>
         <p class="hero-lead">
-          Desarrollador de software enfocado en construir experiencias digitales modernas, soluciones prácticas y productos orientados a resolver problemas reales.
+          Diseño y desarrollo sitios web, sistemas a medida y productos digitales claros, rápidos y pensados para resolver necesidades reales de negocio.
         </p>
-        <div class="personal-mark" aria-label="Marca personal de desarrollo">
-          <img src="/assets/brand-logo.png" alt="" aria-hidden="true">
-          <span>Software, web y producto digital</span>
+        <div class="home-availability">
+          <span aria-hidden="true"></span>
+          Disponible para nuevos proyectos
         </div>
         <div class="hero-actions">
-          <a class="btn primary" href="/proyectos/">
+          <a class="btn primary" href="#proyectos">
             <span class="btn-icon" aria-hidden="true">
               <i class="fi fi-rr-folder-open"></i>
             </span>
-            <span>Ver proyectos</span>
+            <span>Ver mis proyectos</span>
           </a>
-          <a class="btn ghost" href="/contacto/">
+          <a class="btn ghost" href="#contacto">
             <span class="btn-icon" aria-hidden="true">
               <i class="fi fi-rr-envelope"></i>
             </span>
@@ -96,123 +94,110 @@
         <figure class="profile-frame">
           <img src="/assets/andres-prias-profile.png" alt="Retrato profesional de Andrés Prias en un entorno de desarrollo">
         </figure>
-        <div class="product-window">
-          <div class="window-top">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="metric-grid">
-            <article>
-              <span class="metric-label">Stack</span>
-              <strong>Web + Software</strong>
-            </article>
-            <article>
-              <span class="metric-label">Foco</span>
-              <strong>Proyectos reales</strong>
-            </article>
-            <article>
-              <span class="metric-label">Entrega</span>
-              <strong>Escalable</strong>
-            </article>
-            <article>
-              <span class="metric-label">Marca</span>
-              <strong>Personal</strong>
-            </article>
-          </div>
-          <div class="signal-panel">
-            <div class="signal-line"></div>
-            <div class="signal-line short"></div>
-            <div class="signal-line accent"></div>
-          </div>
+        <div class="home-hero-card">
+          <img src="/assets/brand-logo.png" alt="" aria-hidden="true">
+          <div><span>Andrés Prias</span><strong>Software · Web · Producto</strong></div>
         </div>
       </div>
     </section>
 
-    <!-- Sobre mí: tabs interactivos y resumen profesional activo. -->
-    <section class="intro-band about-section about-solutions" aria-label="Resumen profesional" data-reveal>
-      <div class="about-copy about-solutions-copy">
-        <div class="about-line-kicker">
-          <span>SOBRE MÍ</span>
-          <i aria-hidden="true"></i>
-        </div>
-        <h2>Creo soluciones digitales que impulsan <span>ideas</span> y <span>negocios.</span></h2>
-        <p>
-          Desarrollo aplicaciones, sitios web y sistemas a medida que combinan diseño, tecnología y estrategia para resolver problemas reales y generar resultados.
-        </p>
-
-        <div class="about-service-chips" aria-label="Especialidades principales">
-          <span>
-            <i class="fi fi-rr-code-simple" aria-hidden="true"></i>
-            Desarrollo Web
-          </span>
-          <span>
-            <i class="fi fi-rr-cube" aria-hidden="true"></i>
-            Software a medida
-          </span>
-          <span>
-            <i class="fi fi-rr-database" aria-hidden="true"></i>
-            Sistemas internos
-          </span>
-          <span>
-            <i class="fi fi-rr-settings-sliders" aria-hidden="true"></i>
-            Optimización
-          </span>
-          <span>
-            <i class="fi fi-rr-browser" aria-hidden="true"></i>
-            UI/UX
-          </span>
-          <span>
-            <i class="fi fi-rr-bolt" aria-hidden="true"></i>
-            Tecnología
-          </span>
-        </div>
-
-        <a class="btn about-cta" href="/contacto/">
-          <span class="btn-icon" aria-hidden="true">
-            <i class="fi fi-rr-comment"></i>
-          </span>
-          <span>Hablemos de tu proyecto</span>
-          <i class="about-cta-arrow fi fi-rr-arrow-right" aria-hidden="true"></i>
-        </a>
+    <section class="home-section home-services" id="servicios">
+      <div class="home-section-heading" data-reveal>
+        <p class="eyebrow">Servicios</p>
+        <h2>Lo que puedo hacer por tu idea o negocio</h2>
+        <p>Soluciones completas, desde la definición del problema hasta una entrega funcional, clara y preparada para crecer.</p>
       </div>
-
-      <div class="about-solution-grid" aria-label="Servicios y enfoque de Andrés Prias">
-        <article class="about-solution-card">
-          <div class="about-solution-icon">
-            <i class="fi fi-rr-browser" aria-hidden="true"></i>
-          </div>
-          <span>01</span>
-          <h3>Diseño Web Profesional</h3>
-          <p>Páginas modernas, rápidas y optimizadas para convertir visitas en clientes.</p>
+      <div class="home-service-grid">
+        <article data-reveal>
+          <span class="home-card-icon"><i class="fi fi-rr-browser"></i></span>
+          <h3>Desarrollo web</h3>
+          <p>Sitios modernos, responsivos y optimizados para comunicar mejor y convertir visitas en oportunidades.</p>
+          <a href="/servicios/">Conocer el servicio <i class="fi fi-rr-arrow-right"></i></a>
         </article>
-
-        <article class="about-solution-card">
-          <div class="about-solution-icon">
-            <i class="fi fi-rr-code-simple" aria-hidden="true"></i>
-          </div>
-          <span>02</span>
+        <article data-reveal>
+          <span class="home-card-icon"><i class="fi fi-rr-code-simple"></i></span>
           <h3>Sistemas a medida</h3>
-          <p>Software personalizado para automatizar procesos, organizar información y ahorrar tiempo.</p>
+          <p>Software pensado alrededor de tus procesos para organizar información, automatizar tareas y ahorrar tiempo.</p>
+          <a href="/servicios/">Conocer el servicio <i class="fi fi-rr-arrow-right"></i></a>
         </article>
-
-        <article class="about-solution-card">
-          <div class="about-solution-icon">
-            <i class="fi fi-rr-shield-check" aria-hidden="true"></i>
-          </div>
-          <span>03</span>
-          <h3>Experiencia que genera confianza</h3>
-          <p>Me enfoco en entender tu negocio para entregar soluciones útiles, claras y efectivas.</p>
+        <article data-reveal>
+          <span class="home-card-icon"><i class="fi fi-rr-settings-sliders"></i></span>
+          <h3>Optimización digital</h3>
+          <p>Mejoras de experiencia, rendimiento y flujo comercial para que tu producto digital trabaje mejor.</p>
+          <a href="/servicios/">Conocer el servicio <i class="fi fi-rr-arrow-right"></i></a>
         </article>
-
-        <article class="about-solution-card">
-          <div class="about-solution-icon">
-            <i class="fi fi-rr-headset" aria-hidden="true"></i>
-          </div>
-          <span>04</span>
+        <article data-reveal>
+          <span class="home-card-icon"><i class="fi fi-rr-headset"></i></span>
           <h3>Acompañamiento continuo</h3>
-          <p>Soporte, mejoras y mantenimiento para que tu proyecto siempre siga creciendo.</p>
+          <p>Soporte, mantenimiento y mejoras después del lanzamiento para que la solución siga evolucionando.</p>
+          <a href="/servicios/">Conocer el servicio <i class="fi fi-rr-arrow-right"></i></a>
         </article>
+      </div>
+    </section>
+
+    <section class="home-section home-projects" id="proyectos">
+      <div class="home-section-heading" data-reveal>
+        <p class="eyebrow">Portafolio</p>
+        <h2>Proyectos destacados</h2>
+        <p>Casos donde combino desarrollo, interfaz y criterio de producto para entregar soluciones útiles y presentables.</p>
+      </div>
+      <div class="home-project-grid">
+        <article class="home-project-card home-project-featured" data-reveal>
+          <div class="home-project-media">
+            <img src="/assets/nyce-search-samples.png" alt="Sistema de control y búsqueda de muestras desarrollado para NYCE Colombia">
+          </div>
+          <div class="home-project-copy">
+            <span class="home-project-type">Software de escritorio</span>
+            <h3>Sistema de Control de Muestras — NYCE Colombia</h3>
+            <p>Aplicación en JavaFX para gestionar muestras eléctricas, estados, usuarios y evidencia fotográfica con mayor trazabilidad operativa.</p>
+            <div class="home-tech-list"><span>Java 26</span><span>JavaFX</span><span>H2</span><span>Apache POI</span></div>
+            <a href="/proyectos/">Ver detalles <i class="fi fi-rr-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="home-project-card" data-reveal>
+          <div class="home-project-media home-project-logo"><img src="/assets/megabyte-logo.png" alt="Logo de MegaByte"></div>
+          <div class="home-project-copy">
+            <span class="home-project-type">Cliente real · Web</span>
+            <h3>Proyecto para MegaByte</h3>
+            <p>Presencia digital desarrollada para una marca tecnológica, enfocada en claridad, confianza y entrega profesional.</p>
+            <div class="home-tech-list"><span>Web</span><span>UI/UX</span><span>Responsive</span></div>
+            <a href="/proyectos/">Ver detalles <i class="fi fi-rr-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="home-project-card home-project-brand" data-reveal>
+          <div class="home-project-media"><img src="/assets/brand-logo.png" alt="Identidad visual ANDEV"></div>
+          <div class="home-project-copy">
+            <span class="home-project-type">Producto digital</span>
+            <h3>Portfolio ANDEV</h3>
+            <p>Sistema de marca y presencia digital para comunicar experiencia, proyectos y valor profesional.</p>
+            <div class="home-tech-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a href="/proyectos/">Ver detalles <i class="fi fi-rr-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <a class="btn ghost home-all-projects" href="/proyectos/">Explorar todos los proyectos <i class="fi fi-rr-arrow-right"></i></a>
+    </section>
+
+    <section class="home-section home-about" id="sobre-mi" data-reveal>
+      <div>
+        <p class="eyebrow">Sobre mí</p>
+        <h2>Desarrollo con contexto, no solo con código.</h2>
+      </div>
+      <div>
+        <p>Soy Andrés Prias. Construyo software, sitios web y productos digitales con una forma de trabajo cercana: entender primero, diseñar con intención y desarrollar una solución mantenible.</p>
+        <div class="home-about-points"><span>Comunicación clara</span><span>Diseño funcional</span><span>Código mantenible</span><span>Entrega orientada a resultados</span></div>
+      </div>
+    </section>
+
+    <section class="home-contact" id="contacto" data-reveal>
+      <div>
+        <p class="eyebrow">¿Tienes una idea en mente?</p>
+        <h2>Convirtámosla en una solución que funcione.</h2>
+        <p>Cuéntame qué necesitas. Te responderé con claridad sobre el alcance, el proceso y el siguiente paso.</p>
+      </div>
+      <div class="home-contact-actions">
+        <a class="btn primary" href="https://wa.me/573197265704" target="_blank" rel="noreferrer"><i class="fi fi-rr-comment"></i>Escribir por WhatsApp</a>
+        <a class="btn ghost" href="mailto:anpriasca@gmail.com"><i class="fi fi-rr-paper-plane"></i>Enviar correo</a>
       </div>
     </section>
   </main>
@@ -220,7 +205,7 @@
   <footer class="site-footer">
     <div class="footer-copy">
       <span>Andrés Prias</span>
-      <span>Portfolio de desarrollo de software y web</span>
+      <span>Software, web y producto digital desde Colombia</span>
       <span class="icon-credit">Uicons by <a href="https://www.flaticon.es/" target="_blank" rel="noreferrer">Flaticon</a></span>
     </div>
     <div class="theme-rail" aria-hidden="false">
