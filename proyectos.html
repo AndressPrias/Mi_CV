@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/brand-logo.png" as="image">
-  <link rel="stylesheet" href="/styles.css?v=20260713-flaticon-icons">
+  <link rel="stylesheet" href="/styles.css?v=20260719-project-cards">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"url":"https://andev.com.co/","knowsAbout":["Desarrollo web","Software a medida","JavaFX","JavaScript","Productos digitales","Automatización"],"@type":"Person","telephone":"+573197265704","jobTitle":"Desarrollador de software","image":"https://andev.com.co/assets/andres-prias-profile.png","name":"Andrés Prias","@id":"https://andev.com.co/#person","email":"mailto:anpriasca@gmail.com"},{"name":"Andrés Prias Portfolio","@id":"https://andev.com.co/#website","publisher":{"@id":"https://andev.com.co/#person"},"@type":"WebSite","url":"https://andev.com.co/","inLanguage":"es-CO"},{"@id":"https://andev.com.co/proyectos/#webpage","@type":"CollectionPage","url":"https://andev.com.co/proyectos/","name":"Proyectos de Software y Web | Andrés Prias","description":"Casos destacados de Andrés Prias: sistema de control de muestras para NYCE, proyecto entregado para MegaByte, ecommerce, marca personal y mini juego interactivo.","inLanguage":"es-CO","about":{"@id":"https://andev.com.co/#person"},"isPartOf":{"@id":"https://andev.com.co/#website"}}]}</script>
 </head>
 <body>
@@ -64,172 +64,88 @@
     <a href="/contacto/">Contacto</a>
   </nav>
   <main>
-<!-- Proyectos: casos seleccionados, filtros y experiencia real. -->
-    <section class="section projects-redesign" id="proyectos">
-      <div class="projects-hero" data-reveal>
-        <div class="projects-hero-copy">
-          <p class="eyebrow">EXPERIENCIA PROFESIONAL</p>
-          <h2>Casos desarrollados para resolver, vender y construir confianza.</h2>
-          <p>Una selección de trabajos donde combino software, diseño de interfaces y criterio de producto para transformar ideas en soluciones útiles y presentables.</p>
-        </div>
-        <div class="projects-results" aria-label="Resumen de resultados">
-          <article>
-            <strong>05</strong>
-            <span>Casos seleccionados</span>
-          </article>
-          <article>
-            <strong>04</strong>
-            <span>Enfoques de proyecto</span>
-          </article>
-          <article>
-            <strong>100%</strong>
-            <span>Orientado a entrega</span>
-          </article>
-        </div>
-      </div>
+    <section class="section projects-catalog" id="proyectos">
+      <header class="projects-catalog-heading" data-reveal>
+        <p class="eyebrow">Portafolio</p>
+        <h1>Proyectos destacados</h1>
+        <p>Una selección de soluciones donde combino desarrollo, diseño de interfaces y criterio de producto para resolver necesidades reales.</p>
+      </header>
 
-      <div class="project-filter-bar" aria-label="Filtrar proyectos" data-project-filters data-reveal>
-        <button class="is-active" type="button" data-project-filter="all" aria-pressed="true">Todos</button>
-        <button type="button" data-project-filter="software" aria-pressed="false">Software</button>
-        <button type="button" data-project-filter="cliente" aria-pressed="false">Cliente real</button>
-        <button type="button" data-project-filter="web" aria-pressed="false">Web</button>
-        <button type="button" data-project-filter="producto" aria-pressed="false">Producto</button>
-      </div>
-
-      <article class="project-featured-case" data-project-item data-project-type="software universitario" data-reveal>
-        <div class="project-case-content">
-          <div class="project-case-topline">
-            <span class="case-category">Caso destacado</span>
-            <span class="case-status">Proyecto universitario · Software funcional</span>
-          </div>
-          <div class="project-feature-head">
-            <div>
-              <h3>Sistema de Control de Muestras — NYCE Colombia</h3>
-              <p>Aplicación de escritorio en JavaFX para gestionar muestras eléctricas, controlar estados de proceso, guardar evidencia fotográfica y mejorar la trazabilidad operativa.</p>
-            </div>
-            <div class="project-company" aria-label="Proyecto desarrollado para NYCE Colombia">
-              <img src="/assets/nyce-colombia-logo.jpg" alt="Logo de NYCE Colombia">
-              <span>Laboratorio de ensayos eléctricos</span>
-            </div>
-          </div>
-
-          <div class="project-impact-grid" aria-label="Impacto del proyecto NYCE">
-            <article>
-              <strong>Trazabilidad</strong>
-              <span>Códigos internos únicos y estados por muestra.</span>
-            </article>
-            <article>
-              <strong>Operación</strong>
-              <span>Búsqueda, registro, actualización e importación desde Excel.</span>
-            </article>
-            <article>
-              <strong>Control</strong>
-              <span>Usuarios con roles y evidencia fotográfica asociada.</span>
-            </article>
-          </div>
-
-          <div class="project-tags tech-tags">
-            <span><i class="tech-mark java" aria-hidden="true">J</i>Java 26</span>
-            <span><i class="tech-mark javafx" aria-hidden="true">FX</i>JavaFX</span>
-            <span><i class="tech-mark h2" aria-hidden="true">H2</i>H2 Database</span>
-            <span><i class="tech-mark poi" aria-hidden="true">POI</i>Apache POI</span>
-            <span><i class="tech-mark fxml" aria-hidden="true">&lt;/&gt;</i>FXML</span>
-            <span><i class="tech-mark css" aria-hidden="true">CSS</i>CSS</span>
-            <span><i class="tech-mark github" aria-hidden="true">GH</i>Git / GitHub</span>
-          </div>
-
-        <div class="project-showcase" data-project-showcase data-showcase-theme="search">
-          <figure class="project-showcase-stage">
-            <img class="project-showcase-main" src="/assets/nyce-search-samples.png" alt="Pantalla de búsqueda y gestión de muestras del sistema NYCE">
-            <figcaption>
-              <span data-showcase-label>Búsqueda y gestión</span>
-              <strong data-showcase-count>04 / 04</strong>
-            </figcaption>
+      <div class="projects-catalog-grid">
+        <article class="catalog-project-card" data-reveal>
+          <figure class="catalog-project-media catalog-project-nyce">
+            <img src="/assets/nyce-search-samples.png" alt="Pantalla de búsqueda y gestión del sistema de control de muestras de NYCE Colombia">
           </figure>
-          <div class="project-showcase-thumbs" role="tablist" aria-label="Capturas del sistema de control de muestras">
-            <button type="button" role="tab" aria-selected="false" title="Inicio de sesión" data-showcase-theme="login" data-showcase-src="/assets/nyce-login.png" data-showcase-alt="Pantalla de inicio de sesión del sistema NYCE" data-showcase-label="Inicio de sesión" data-showcase-count="01 / 04">
-              <img src="/assets/nyce-login.png" alt="">
-            </button>
-            <button type="button" role="tab" aria-selected="false" title="Panel principal" data-showcase-theme="dashboard" data-showcase-src="/assets/nyce-dashboard.png" data-showcase-alt="Panel principal para administración del sistema NYCE" data-showcase-label="Panel principal" data-showcase-count="02 / 04">
-              <img src="/assets/nyce-dashboard.png" alt="">
-            </button>
-            <button type="button" role="tab" aria-selected="false" title="Registro de muestras" data-showcase-theme="register" data-showcase-src="/assets/nyce-register-sample.png" data-showcase-alt="Formulario para registrar una muestra en el sistema NYCE" data-showcase-label="Registro de muestras" data-showcase-count="03 / 04">
-              <img src="/assets/nyce-register-sample.png" alt="">
-            </button>
-            <button class="is-active" type="button" role="tab" aria-selected="true" title="Búsqueda y gestión" data-showcase-theme="search" data-showcase-src="/assets/nyce-search-samples.png" data-showcase-alt="Pantalla de búsqueda y gestión de muestras del sistema NYCE" data-showcase-label="Búsqueda y gestión" data-showcase-count="04 / 04">
-              <img src="/assets/nyce-search-samples.png" alt="">
-            </button>
-          </div>
-        </div>
-        </div>
-      </article>
-
-      <div class="project-case-grid" aria-label="Casos secundarios">
-        <article class="project-case-card project-case-megabyte" data-project-item data-project-type="cliente web" data-reveal>
-          <div class="case-media case-media-logo">
-            <img class="megabyte-logo" src="/assets/megabyte-logo.png" alt="Logo de MegaByte">
-            <span class="case-pill">Cliente real</span>
-          </div>
-          <div class="case-body">
-            <div class="case-meta"><span>02</span><strong>Cliente real</strong></div>
-            <h3>Proyecto entregado para MegaByte</h3>
-            <p>Solución digital para una marca tecnológica, pensada para comunicar confianza, claridad y presencia profesional.</p>
-            <div class="case-proof"><span>Rol: Desarrollo web</span><span>Estado: Entregado</span></div>
-            <div class="project-tags"><span>Web</span><span>Marca tecnológica</span><span>Cliente</span></div>
+          <div class="catalog-project-body">
+            <span class="catalog-project-type"><i class="fi fi-rr-laptop-code" aria-hidden="true"></i> Software de escritorio</span>
+            <h2>Sistema de Control de Muestras — NYCE Colombia</h2>
+            <p>Aplicación en JavaFX para gestionar muestras eléctricas, estados de proceso, usuarios y evidencia fotográfica con mayor trazabilidad operativa.</p>
+            <div class="catalog-tech-list"><span>Java 26</span><span>JavaFX</span><span>H2</span><span>Apache POI</span><span>FXML</span></div>
+            <a class="catalog-project-link" href="/contacto/">Ver detalles <i class="fi fi-rr-arrow-right" aria-hidden="true"></i></a>
           </div>
         </article>
 
-        <article class="project-case-card project-case-commerce" data-project-item data-project-type="web ecommerce" data-reveal>
-          <div class="case-media case-media-commerce" aria-hidden="true">
-            <div class="commerce-metric"><span>Conversión</span><strong>+38%</strong></div>
-            <div class="commerce-bars"><i></i><i></i><i></i><i></i><i></i></div>
-            <span class="case-pill">Ecommerce</span>
-          </div>
-          <div class="case-body">
-            <div class="case-meta"><span>03</span><strong>Ecommerce</strong></div>
-            <h3>Ecommerce y Optimización Comercial</h3>
-            <p>Arquitectura visual y funcional para mejorar catálogo, rutas de compra y experiencia comercial.</p>
-            <div class="case-proof"><span>Foco: Ventas</span><span>Meta: Conversión</span></div>
-            <div class="project-tags"><span>Ecommerce</span><span>Performance</span><span>UX</span></div>
+        <article class="catalog-project-card" data-reveal>
+          <figure class="catalog-project-media catalog-project-megabyte">
+            <img src="/assets/megabyte-logo.png" alt="Logo de MegaByte">
+            <span>Proyecto entregado</span>
+          </figure>
+          <div class="catalog-project-body">
+            <span class="catalog-project-type"><i class="fi fi-rr-browser" aria-hidden="true"></i> Web · Cliente real</span>
+            <h2>Proyecto para MegaByte</h2>
+            <p>Solución digital para una marca tecnológica, diseñada para comunicar confianza, claridad y una presencia profesional consistente.</p>
+            <div class="catalog-tech-list"><span>Desarrollo web</span><span>Responsive</span><span>UI/UX</span><span>Marca</span></div>
+            <a class="catalog-project-link" href="/contacto/">Ver detalles <i class="fi fi-rr-arrow-right" aria-hidden="true"></i></a>
           </div>
         </article>
 
-        <article class="project-case-card project-case-personal" data-project-item data-project-type="web producto" data-reveal>
-          <div class="case-media case-media-personal" aria-hidden="true">
-            <img src="/assets/brand-logo.png" alt="">
+        <article class="catalog-project-card" data-reveal>
+          <div class="catalog-project-media catalog-project-commerce" aria-hidden="true">
+            <div class="catalog-store-window">
+              <div class="catalog-store-top"><i></i><i></i><i></i></div>
+              <div class="catalog-store-content">
+                <span class="catalog-product-image"></span>
+                <span class="catalog-product-copy"><i></i><i></i><b>Comprar</b></span>
+              </div>
+            </div>
+            <span class="catalog-commerce-stat"><small>Conversión</small><strong>+38%</strong></span>
+          </div>
+          <div class="catalog-project-body">
+            <span class="catalog-project-type"><i class="fi fi-rr-shopping-cart" aria-hidden="true"></i> Ecommerce</span>
+            <h2>Ecommerce y optimización comercial</h2>
+            <p>Arquitectura visual y funcional para mejorar el catálogo, simplificar la ruta de compra y fortalecer la experiencia comercial.</p>
+            <div class="catalog-tech-list"><span>Ecommerce</span><span>Performance</span><span>UX</span><span>Conversión</span></div>
+            <a class="catalog-project-link" href="/contacto/">Ver detalles <i class="fi fi-rr-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+
+        <article class="catalog-project-card" data-reveal>
+          <figure class="catalog-project-media catalog-project-andev">
+            <img src="/assets/brand-logo.png" alt="Identidad visual de ANDEV">
             <div><strong>ANDEV</strong><span>Software · Web · Producto</span></div>
-            <span class="case-pill">Marca personal</span>
-          </div>
-          <div class="case-body">
-            <div class="case-meta"><span>04</span><strong>Producto digital</strong></div>
-            <h3>Marca Personal de Desarrollo Web</h3>
-            <p>Sistema de presencia digital para comunicar habilidades, proyectos y valor profesional con una narrativa clara.</p>
-            <div class="case-proof"><span>Foco: Identidad</span><span>Uso: Portfolio</span></div>
-            <div class="project-tags"><span>Portfolio</span><span>Contenido</span><span>Dirección visual</span></div>
+          </figure>
+          <div class="catalog-project-body">
+            <span class="catalog-project-type"><i class="fi fi-rr-user" aria-hidden="true"></i> Producto digital</span>
+            <h2>Marca personal de desarrollo</h2>
+            <p>Sistema de presencia digital para comunicar habilidades, proyectos y valor profesional mediante una narrativa clara y una identidad propia.</p>
+            <div class="catalog-tech-list"><span>Portfolio</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a class="catalog-project-link" href="/contacto/">Ver detalles <i class="fi fi-rr-arrow-right" aria-hidden="true"></i></a>
           </div>
         </article>
 
-        <article class="project-case-card project-case-space" data-project-item data-project-type="producto web" data-reveal>
-          <div class="case-media case-media-space" aria-hidden="true">
-            <i class="space-star star-one"></i>
-            <i class="space-star star-two"></i>
-            <i class="space-enemy enemy-one"></i>
-            <i class="space-enemy enemy-two"></i>
-            <span class="space-project-ship"></span>
-            <span class="case-pill">Mini juego</span>
+        <article class="catalog-project-card" data-reveal>
+          <div class="catalog-project-media catalog-project-game" aria-hidden="true">
+            <i class="catalog-star star-a"></i><i class="catalog-star star-b"></i><i class="catalog-star star-c"></i>
+            <span class="catalog-game-enemy enemy-a"></span><span class="catalog-game-enemy enemy-b"></span>
+            <span class="catalog-game-ship"></span>
+            <div class="catalog-game-score"><small>PUNTOS</small><strong>02480</strong></div>
           </div>
-          <div class="case-body">
-            <div class="case-meta"><span>05</span><strong>Interacción</strong></div>
-            <h3>Defensa Cósmica</h3>
-            <p>Experiencia interactiva con ranking local, estado de juego y una dinámica ligera para mostrar criterio de producto.</p>
-            <div class="case-proof"><span>Stack: JavaScript</span><span>Tipo: Arcade web</span></div>
-            <div class="project-tags"><span>JavaScript</span><span>UI</span><span>Interacción</span></div>
-            <a class="btn ghost project-link" href="/mini-juego/">
-              <span class="btn-icon" aria-hidden="true">
-                <i class="fi fi-rr-rocket-lunch"></i>
-              </span>
-              <span>Jugar ahora</span>
-            </a>
+          <div class="catalog-project-body">
+            <span class="catalog-project-type"><i class="fi fi-rr-rocket-lunch" aria-hidden="true"></i> Mini juego web</span>
+            <h2>Defensa Cósmica</h2>
+            <p>Experiencia arcade con ranking local, estados de partida y controles adaptados para demostrar interacción y lógica con JavaScript.</p>
+            <div class="catalog-tech-list"><span>JavaScript</span><span>Canvas</span><span>UI</span><span>Interacción</span></div>
+            <a class="catalog-project-link" href="/mini-juego/">Jugar ahora <i class="fi fi-rr-arrow-right" aria-hidden="true"></i></a>
           </div>
         </article>
       </div>
