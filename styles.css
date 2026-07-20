@@ -53,6 +53,7 @@
 }
 
 .catalog-project-card {
+  display: block;
   overflow: hidden;
   min-width: 0;
   border: 1px solid var(--line);
@@ -60,6 +61,11 @@
   background: rgba(255, 255, 255, 0.045);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.catalog-project-card:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 4px;
 }
 
 .catalog-project-card:hover {
